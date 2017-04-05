@@ -83,7 +83,7 @@ class USER
 		}
 		catch(PDOException $ex)
 		{
-			echo $ex->getMessage();
+			echo $ex->getMessage(); 
 		}
 	}
 	
