@@ -30,7 +30,7 @@ if(isset($_GET['id']) && isset($_GET['code']))
 			$msg = "
 		           <div class='alert alert-success'>
 				   <button class='close' data-dismiss='alert'>&times;</button>
-					  <strong>WoW !</strong>  Your Account is Now Activated : <a href='index.php'>Login here</a>
+					  <strong>Gratulujeme!</strong>  Účet máš nyní aktivovaný, <a href='index.php'>Zde se přihlaš</a>
 			       </div>
 			       ";	
 		}
@@ -39,7 +39,7 @@ if(isset($_GET['id']) && isset($_GET['code']))
 			$msg = "
 		           <div class='alert alert-error'>
 				   <button class='close' data-dismiss='alert'>&times;</button>
-					  <strong>sorry !</strong>  Your Account is allready Activated : <a href='index.php'>Login here</a>
+					  <strong>STOP!</strong> Tvůj účet je již aktivovaný, <a href='index.php'>raději se rovnou přihlaš</a>
 			       </div>
 			       ";
 		}
@@ -49,7 +49,7 @@ if(isset($_GET['id']) && isset($_GET['code']))
 		$msg = "
 		       <div class='alert alert-error'>
 			   <button class='close' data-dismiss='alert'>&times;</button>
-			   <strong>sorry !</strong>  No Account Found : <a href='register.php'>Signup here</a>
+			   <strong>Hups! </strong>Tak tvůj učet tu asi není. <a href='register.php'>Registruj se zde</a>
 			   </div>
 			   ";
 	}	
@@ -59,21 +59,18 @@ if(isset($_GET['id']) && isset($_GET['code']))
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Confirm Registration</title>
-    <!-- Bootstrap -->
+    <title>Potvrzení registrace</title>
+
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="assets/styles.css" rel="stylesheet" media="screen">
-     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+
     <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
   </head>
   <body id="login">
     <div class="container">
 		<?php if(isset($msg)) { echo $msg; } ?>
-    </div> <!-- /container -->
+    </div>
     <script src="vendors/jquery-1.9.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
   </body>

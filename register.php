@@ -25,7 +25,7 @@ if(isset($_POST['btn-signup']))
 	{
 		$msg = "<div class='alert alert-error'>
 				<button class='close' data-dismiss='alert'>&times;</button>
-					<strong>Sorry !</strong>  email allready exists , Please Try another one
+					Na tento email už byl vytvořen účet.
 			  </div>";
 	}
 	else
@@ -43,21 +43,21 @@ if(isset($_POST['btn-signup']))
 						<br /><br />
 						<a href='http://localhost/x/verify.php?id=$id&code=$code'>Klikněte zde pro aktivaci vašeho účtu</a>
 						<br /><br />
-						Thanks,";
+						Děkujeme za registraci";
 						
-			$subject = "Confirm Registration";
+			$subject = "Potvrďte registracu";
 						
 			$reg_user->send_mail($email,$message,$subject);	
 			$msg = "<div class='alert alert-success'>
 						<button class='close' data-dismiss='alert'>&times;</button>
-						<strong>Success!</strong>  We've sent an email to $email.
-                    Please click on the confirmation link in the email to create your account. 
+						<strong>Výborně!</strong>  Na adresu $email
+                    jsme zaslali aktivační link, po kterém bude tvoje registrace platná.
 			  		</div>
 					";
 		}
 		else
 		{
-			echo "sorry , Query could no execute...";
+			echo "Omlouváme se nastala chyba";
 		}		
 	}
 }
@@ -65,15 +65,11 @@ if(isset($_POST['btn-signup']))
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Signup | Coding Cage</title>
-    <!-- Bootstrap -->
+    <title>Registrace</title>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="assets/styles.css" rel="stylesheet" media="screen">
-     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+
     <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
   </head>
   <body id="login">
@@ -85,11 +81,11 @@ if(isset($_POST['btn-signup']))
         <input type="email" class="input-block-level" placeholder="Email address" name="txtemail" required />
         <input type="password" class="input-block-level" placeholder="Password" name="txtpass" required />
      	<hr />
-        <button class="btn btn-large btn-primary" type="submit" name="btn-signup">Sign Up</button>
-        <a href="index.php" style="float:right;" class="btn btn-large">Sign In</a>
+        <button class="btn btn-large btn-primary" type="submit" name="btn-signup">Registrovat</button>
+        <a href="index.php" style="float:right;" class="btn btn-large">Přihlásit</a>
       </form>
 
-    </div> <!-- /container -->
+    </div>
     <script src="vendors/jquery-1.9.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
   </body>

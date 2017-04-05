@@ -79,14 +79,14 @@ if(isset($_GET['id']) && isset($_GET['code']))
 			echo $msg;
 		}
 		?>
-        <input type="password" class="input-block-level" placeholder="New Password" name="pass" required>
-        <input type="password" class="input-block-level" placeholder="Confirm New Password" name="confirm-pass" required>
+        <input type="password" class="input-block-level" placeholder="Nové heslo" name="pass" required>
+        <input type="password" class="input-block-level" placeholder="Potvrďte nové heslo" name="confirm-pass" required>
      	<hr>
-        <button class="btn btn-large btn-primary" type="submit" name="btn-reset-pass">Reset Your Password</button>
+        <button class="btn btn-large btn-primary" type="submit" name="btn-reset-pass">Resetovat heslo</button>
         
       </form>
 
-    </div> <!-- /container -->
+    </div>
     <script src="bootstrap/js/jquery-1.9.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
   </body>

@@ -115,13 +115,13 @@ class USER
 		$mail->SMTPDebug  = 0;                     
 		$mail->SMTPAuth   = true;                  
 		$mail->SMTPSecure = "ssl";                 
-		$mail->Host       = "smtp.gmail.com";      
+		$mail->Host       = "smtp.seznam.cz";
 		$mail->Port       = 465;             
 		$mail->AddAddress($email);
-		$mail->Username="your_gmail_id_here@gmail.com";  
-		$mail->Password="your_gmail_password_here";            
-		$mail->SetFrom('your_gmail_id_here@gmail.com','Coding Cage');
-		$mail->AddReplyTo("your_gmail_id_here@gmail.com","Coding Cage");
+		$mail->Username="vutgame@seznam.cz";
+		$mail->Password="studentvpn";
+		$mail->SetFrom('vutgame@gmail.com','VUTgame');
+		$mail->AddReplyTo("vutgame@gmail.com","VUTgame");
 		$mail->Subject    = $subject;
 		$mail->MsgHTML($message);
 		$mail->Send();

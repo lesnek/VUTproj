@@ -38,7 +38,7 @@ if(isset($_POST['login']))
 			?>
             <div class='alert alert-error'>
 				<button class='close' data-dismiss='alert'>&times;</button>
-				<strong>Sorry!</strong> This Account is not Activated Go to your Inbox and Activate it. 
+				Tento účet není aktivovaný, prosím zkontrolujte si emailovou schránku kam vám byl zasklán aktivační link.
 			</div>
             <?php
 		}
@@ -50,18 +50,18 @@ if(isset($_POST['login']))
 			?>
             <div class='alert alert-success'>
 				<button class='close' data-dismiss='alert'>&times;</button>
-				<strong>Wrong Details!</strong> 
+				<strong>Nesprávné zadání</strong>
 			</div>
             <?php
 		}
 		?>
-        <h2 class="form-signin-heading">Sign In.</h2><hr />
+        <h2 class="form-signin-heading">Přihlášení</h2><hr />
         <input type="email" class="input-block-level" placeholder="Email address" name="txtemail" required />
         <input type="password" class="input-block-level" placeholder="Password" name="txtupass" required />
      	<hr />
         <button class="btn btn-large btn-primary" type="submit" name="login">Přihlásit</button>
         <a href="register.php" style="float:right;" class="btn btn-large">Registrovat</a><hr />
-        <a href="fpass.php">Lost your Password ? </a>
+        <a href="fpass.php">Zapomněl jsi heslo?</a>
       </form>
 
     </div> <!-- /container -->
