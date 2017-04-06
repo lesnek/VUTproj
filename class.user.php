@@ -26,7 +26,7 @@ class USER
 		return $stmt;
 	}
 	
-	public function register($uname,$email,$upass,$level,$zkusenosti,$energie,$stesti,$inteligence,$soustredeni,$znamka,$pohlavi,$code)
+	public function register($uname,$email,$upass,$levl,$zkusenosti,$energie,$stesti,$inteligence,$soustredeni,$znamka,$pohlavi,$code)
 	{
 		try
 		{							
