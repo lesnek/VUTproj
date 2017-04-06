@@ -29,7 +29,7 @@ if(isset($_POST['submit']))
 				   <br /><br />
 				   Klikněte prosím níže pro resetování hesla:
 				   <br /><br />
-				   <a href='www.suprweb.php5.cz/resetpass.php?id=$id&code=$code'>Resetovat heslo</a>";
+				   <a href='http://www.suprweb.php5.cz/resetpass.php?id=$id&code=$code'>Resetovat heslo</a>";
 		$subject = "Password Reset";
 		
 		$user->send_mail($email,$message,$subject);
