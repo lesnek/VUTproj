@@ -56,8 +56,8 @@ if(isset($_POST['login']))
 		}
 		?>
         <h2 class="form-signin-heading">Přihlášení</h2><hr />
-        <input type="email" class="input-block-level" placeholder="Email address" name="txtemail" required />
-        <input type="password" class="input-block-level" placeholder="Password" name="txtupass" required />
+        <input type="email" class="input-block-level" placeholder="Email" name="txtemail" required />
+        <input type="password" class="input-block-level" placeholder="Heslo" name="txtupass" required />
      	<hr />
         <button class="btn btn-large btn-primary" type="submit" name="login">Přihlásit</button>
         <a href="register.php" style="float:right;" class="btn btn-large">Registrovat</a><hr />
