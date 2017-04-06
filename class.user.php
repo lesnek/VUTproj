@@ -115,7 +115,7 @@ class USER
 		$mail->SMTPDebug  = 0;                     
 		$mail->SMTPAuth   = true;                  
 		$mail->SMTPSecure = "ssl";                 
-		$mail->Host       = "smtp.email.cz";
+		$mail->Host       = "smtp.seznam.cz";
 		$mail->Port       = 465;             
 		$mail->AddAddress($email);
 		$mail->Username="vutgame@email.cz";
