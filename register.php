@@ -66,7 +66,6 @@ if(isset($_POST['btn-signup']))
 <html>
   <head>
     <title>Registrace</title>
-    <meta charset="UTF-8">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="assets/styles.css" rel="stylesheet" media="screen">
@@ -77,7 +76,7 @@ if(isset($_POST['btn-signup']))
     <div class="container">
 				<?php if(isset($msg)) echo $msg;  ?>
       <form class="form-signin" method="post">
-        <h2 class="form-signin-heading">Sign Up</h2><hr />
+        <h2 class="form-signin-heading">Registrace</h2><hr />
         <input type="text" class="input-block-level" placeholder="Login" name="txtuname" required />
         <input type="email" class="input-block-level" placeholder="Email" name="txtemail" required />
         <input type="password" class="input-block-level" placeholder="Heslo" name="txtpass" required />
