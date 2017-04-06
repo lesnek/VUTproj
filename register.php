@@ -66,6 +66,7 @@ if(isset($_POST['btn-signup']))
 <html>
   <head>
     <title>Registrace</title>
+    <meta charset="UTF-8">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="assets/styles.css" rel="stylesheet" media="screen">
