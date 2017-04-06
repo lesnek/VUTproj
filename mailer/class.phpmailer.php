@@ -1733,7 +1733,7 @@ class PHPMailer {
         // Replace every high ascii, control =, ? and _ characters
         //TODO using /e (equivalent to eval()) is probably not a good idea
         $encoded = preg_replace_callback('/([\000-\011\013\014\016-\037\075\077\137\177-\377])/e',
-              "'='.sprintf('%02X', ord('\\1'))", $encoded);
+              "'='.sprintf('%02X', ord('\\2'))", $encoded);
         break;
     }
 
