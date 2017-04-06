@@ -41,7 +41,7 @@ if(isset($_POST['btn-signup']))
 						Vítejte v naší malé VUT hře<br/>
 						Pro registraci pokračujte přes odkaz níže<br/>
 						<br /><br />
-						<a href='suprweb.php5.cz/verify.php?id=$id&code=$code'>Klikněte zde pro aktivaci vašeho účtu</a>
+						<a href='www.suprweb.php5.cz/x/verify.php?id=$id&code=$code'>Klikněte zde pro aktivaci vašeho účtu</a>
 						<br /><br />
 						Děkujeme za registraci";
 						
