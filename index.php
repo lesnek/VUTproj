@@ -24,7 +24,7 @@ if(isset($_POST['login']))
 <html>
   <head>
     <title>Přihlášení | VUT game</title>
-    <!-- Bootstrap -->
+
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="assets/styles.css" rel="stylesheet" media="screen">
@@ -64,7 +64,7 @@ if(isset($_POST['login']))
         <a href="fpass.php">Zapomněl jsi heslo?</a>
       </form>
 
-    </div> <!-- /container -->
+    </div>
     <script src="bootstrap/js/jquery-1.9.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
   </body>

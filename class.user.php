@@ -115,13 +115,13 @@ class USER
 		$mail->SMTPDebug  = 0;                     
 		$mail->SMTPAuth   = true;                  
 		$mail->SMTPSecure = "ssl";                 
-		$mail->Host       = "smtp.seznam.cz";
+		$mail->Host       = "smtp.email.cz";
 		$mail->Port       = 465;             
 		$mail->AddAddress($email);
-		$mail->Username="vutgame@seznam.cz";
+		$mail->Username="vutgame@email.cz";
 		$mail->Password="studentvpn";
-		$mail->SetFrom('vutgame@gmail.com','VUTgame');
-		$mail->AddReplyTo("vutgame@gmail.com","VUTgame");
+		$mail->SetFrom('vutgame@email.cz','VUTgame');
+		$mail->AddReplyTo("vutgame@email.cz","VUTgame");
 		$mail->Subject    = $subject;
 		$mail->MsgHTML($message);
 		$mail->Send();
