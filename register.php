@@ -41,7 +41,7 @@ if(isset($_POST['btn-signup']))
 						Vítejte v naší malé VUT hře<br/>
 						Pro registraci pokračujte přes odkaz níže<br/>
 						<br /><br />
-						<a href='http://localhost/x/verify.php?id=$id&code=$code'>Klikněte zde pro aktivaci vašeho účtu</a>
+						<a href='www.suprweb.php5.cz/verify.php?id=$id&code=$code'>Klikněte zde pro aktivaci vašeho účtu</a>
 						<br /><br />
 						Děkujeme za registraci";
 						
@@ -77,9 +77,9 @@ if(isset($_POST['btn-signup']))
 				<?php if(isset($msg)) echo $msg;  ?>
       <form class="form-signin" method="post">
         <h2 class="form-signin-heading">Sign Up</h2><hr />
-        <input type="text" class="input-block-level" placeholder="Username" name="txtuname" required />
-        <input type="email" class="input-block-level" placeholder="Email address" name="txtemail" required />
-        <input type="password" class="input-block-level" placeholder="Password" name="txtpass" required />
+        <input type="text" class="input-block-level" placeholder="Login" name="txtuname" required />
+        <input type="email" class="input-block-level" placeholder="Email" name="txtemail" required />
+        <input type="password" class="input-block-level" placeholder="Heslo" name="txtpass" required />
      	<hr />
         <button class="btn btn-large btn-primary" type="submit" name="btn-signup">Registrovat</button>
         <a href="index.php" style="float:right;" class="btn btn-large">Přihlásit</a>
