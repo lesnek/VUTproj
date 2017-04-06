@@ -19,7 +19,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     
     <head>
         <title><?php echo $row['userEmail']; ?></title>
-        <!-- Bootstrap -->
+
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
@@ -34,7 +34,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                      <span class="icon-bar"></span>
                      <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="#">Member Home</a>
+                    <a class="brand" href="#">VUT game</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
                             <li class="dropdown">
@@ -43,14 +43,14 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a tabindex="-1" href="logout.php">Logout</a>
+                                        <a tabindex="-1" href="logout.php">Odhlásit</a>
                                     </li>
                                 </ul>
                             </li>
                         </ul>
                         <ul class="nav">
                             <li class="active">
-                                <a href="http://www.codingcage.com/">Coding Cage</a>
+                                <a href="http://www.codingcage.com/">Postava</a>
                             </li>
                             <li class="dropdown">
                                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Tutorials <b class="caret"></b>

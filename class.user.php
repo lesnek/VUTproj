@@ -26,17 +26,25 @@ class USER
 		return $stmt;
 	}
 	
-	public function register($uname,$email,$upass,$code)
+	public function register($uname,$email,$upass,$level,$zkusenosti,$energie,$stesti,$inteligence,$soustredeni,$znamka,$pohlavi,$code)
 	{
 		try
 		{							
 			$password = md5($upass);
-			$stmt = $this->conn->prepare("INSERT INTO tbl_users(userName,userEmail,userPass,tokenCode) 
-			                                             VALUES(:user_name, :user_mail, :user_pass, :active_code)");
+			$stmt = $this->conn->prepare("INSERT INTO tbl_users(userName,userEmail,userPass,tokenCode,levl,zkusenosti,energie,stesti,inteligence,soustredeni,znamka,pohlavi) 
+			                                             VALUES(:user_name, :user_mail, :user_pass, :active_code, :user_level, :zkusenosti, :energie, :stesti, :inteligence, :soustredeni, :znamka, :pohlavi)");
 			$stmt->bindparam(":user_name",$uname);
 			$stmt->bindparam(":user_mail",$email);
 			$stmt->bindparam(":user_pass",$password);
 			$stmt->bindparam(":active_code",$code);
+			$stmt->bindParam(":user_level",$levl);
+            $stmt->bindParam(":zkusenosti",$zkusenosti);
+            $stmt->bindParam(":energie",$energie);
+            $stmt->bindParam(":stesti",$stesti);
+            $stmt->bindParam(":inteligence",$inteligence);
+            $stmt->bindParam(":soustredeni",$soustredeni);
+            $stmt->bindParam(":znamka",$znamka);
+            $stmt->bindParam(":pohlavi",$pohlavi);
 			$stmt->execute();	
 			return $stmt;
 		}

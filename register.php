@@ -15,6 +15,15 @@ if(isset($_POST['btn-signup']))
 	$uname = trim($_POST['txtuname']);
 	$email = trim($_POST['txtemail']);
 	$upass = trim($_POST['txtpass']);
+	$levl = 1;
+	$zkusenosti = 0;
+	$energie = 100;
+	$stesti = 1;
+	$inteligence = 1;
+	$soustredeni = 1;
+	$znamka = 0;
+	$pohlavi = trim($_POST['pohlavi']);
+
 	$code = md5(uniqid(rand()));
 	
 	$stmt = $reg_user->runQuery("SELECT * FROM tbl_users WHERE userEmail=:email_id");
@@ -30,7 +39,7 @@ if(isset($_POST['btn-signup']))
 	}
 	else
 	{
-		if($reg_user->register($uname,$email,$upass,$code))
+		if($reg_user->register($uname,$email,$upass,$levl,$zkusenosti,$energie,$stesti,$inteligence,$soustredeni,$znamka,$pohlavi,$code))
 		{			
 			$id = $reg_user->lasdID();		
 			$key = base64_encode($id);
@@ -77,9 +86,10 @@ if(isset($_POST['btn-signup']))
 				<?php if(isset($msg)) echo $msg;  ?>
       <form class="form-signin" method="post">
         <h2 class="form-signin-heading">Registrace</h2><hr />
-        <input type="text" class="input-block-level" placeholder="Login" name="txtuname" required />
-        <input type="email" class="input-block-level" placeholder="Email" name="txtemail" required />
-        <input type="password" class="input-block-level" placeholder="Heslo" name="txtpass" required />
+        <input type="text" class="input-block-level" placeholder="Login" name="txtuname" required>
+        <input type="email" class="input-block-level" placeholder="Email" name="txtemail" required>
+        <input type="password" class="input-block-level" placeholder="Heslo" name="txtpass" required>
+        <input type="checkbox" class="input-block-level" name="pohlavi" required>
      	<hr />
         <button class="btn btn-large btn-primary" type="submit" name="btn-signup">Registrovat</button>
         <a href="index.php" style="float:right;" class="btn btn-large">Přihlásit</a>
