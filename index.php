@@ -54,7 +54,7 @@ if(isset($_POST['login']))
             <?php
 		}
 		?>
-        <h2 class="form-signin-heading">Přihlášení22</h2><hr />
+        <h2 class="form-signin-heading">Přihlášení</h2><hr />
         <input type="email" class="input-block-level" placeholder="Email" name="txtemail" required />
         <input type="password" class="input-block-level" placeholder="Heslo" name="txtupass" required />
      	<hr />
