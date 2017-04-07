@@ -1,0 +1,23 @@
+<body id="login">
+<div class="container">
+    <?php include_once "views/message.phtml"; ?>
+    <form class="form-signin" method="post">
+        <h2 class="form-signin-heading">Registrace</h2><hr />
+        <input type="text" class="input-block-level" placeholder="Login" name="txtuname" required>
+        <input type="email" class="input-block-level" placeholder="Email" name="txtemail" required>
+        <input type="password" class="input-block-level" placeholder="Heslo" name="txtpass" required>
+        <label>
+            <input type="radio" class="radio-inline" name="pohlavi" value="M"> Muž
+        </label>
+        <label>
+            <input type="radio" class="radio-inline" name="pohlavi" value="W"> Žena
+        </label>
+        <hr />
+        <button class="btn btn-large btn-primary" type="submit" name="btn-signup">Registrovat</button>
+        <a href="index.php" style="float:right;" class="btn btn-large">Přihlásit</a>
+    </form>
+
+</div>
+<script src="vendors/jquery-1.9.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>

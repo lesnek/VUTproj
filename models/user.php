@@ -12,6 +12,15 @@ class USER
 {
     const IS_ACTIVATE         = 'Y';
     const IS_NOT_ACTIVATE     = 'N';
+
+    const DEFAULT_LEVL        = 1;
+    const DEFAULT_ZKUSENOSTI  = 0;
+    const DEFAULT_ENERGIE     = 100;
+    const DEFAULT_STESTI      = 1;
+    const DEFAULT_INTELIGENCE = 1;
+    const DEFAULT_SOUSTREDENI = 1;
+    const DEFAULT_ZNAMKA      = 0;
+
     const TABLE               = 'tbl_users';
 
     const COLUMN_ID           = 'id';
