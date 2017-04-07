@@ -52,8 +52,6 @@ class Database
 
     public function insert($table, $data)
     {
-        var_dump($data);
-        exit();
         $cols = implode(',' , array_keys($data));
         $val  = ':val_' . implode(',:val_' , array_keys($data));
         $sql = 'INSERT INTO ' . $table . ' (' . $cols . ') VALUES (' . $val . ');';
@@ -61,8 +59,10 @@ class Database
         $stmt = self::$conn->prepare($sql);
         foreach ($data as $key => $value)
         {
+            var_dump($key.' => '.$value.'<br/>');
             $stmt->bindparam(':val_' . $key, $value);
         }
+    exit();
         $stmt->execute();
         return $stmt;
     }
