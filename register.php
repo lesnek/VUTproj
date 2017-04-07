@@ -89,7 +89,12 @@ if(isset($_POST['btn-signup']))
         <input type="text" class="input-block-level" placeholder="Login" name="txtuname" required>
         <input type="email" class="input-block-level" placeholder="Email" name="txtemail" required>
         <input type="password" class="input-block-level" placeholder="Heslo" name="txtpass" required>
-        <input type="checkbox" class="input-block-level" name="pohlavi" required>
+          <label class="radio-inline">
+              <input type="radio" name="pohlavi" value="M"> Muž
+          </label>
+          <label class="radio-inline">
+              <input type="radio" name="pohlavi" value="W"> Žena
+          </label>
      	<hr />
         <button class="btn btn-large btn-primary" type="submit" name="btn-signup">Registrovat</button>
         <a href="index.php" style="float:right;" class="btn btn-large">Přihlásit</a>
