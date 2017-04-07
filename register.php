@@ -106,7 +106,7 @@ $class->start();
   </head>
   <body id="login">
     <div class="container">
-				<?php include "views/message.phtml"; ?>
+				<?php require_once "views/message.phtml"; ?>
       <form class="form-signin" method="post">
         <h2 class="form-signin-heading">Registrace</h2><hr />
         <input type="text" class="input-block-level" placeholder="Login" name="txtuname" required>
