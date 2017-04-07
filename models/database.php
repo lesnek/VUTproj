@@ -64,7 +64,6 @@ class Database
         }
 var_dump($sql);
 var_dump($stmt);
-exit();
         $stmt->execute();
         return $stmt;
     }
