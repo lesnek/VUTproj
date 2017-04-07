@@ -88,43 +88,44 @@ exit();
                 */
             }
         }
-    }
-}
-$class = new registerController();
-$class->start();
 
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Registrace</title>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="assets/layout.css" rel="stylesheet" media="screen">
 
     <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-  </head>
-  <body id="login">
-    <div class="container">
-				<?php require_once "views/message.phtml"; ?>
-      <form class="form-signin" method="post">
+</head>
+<body id="login">
+<div class="container">
+    <?php include_once "views/message.phtml"; ?>
+    <form class="form-signin" method="post">
         <h2 class="form-signin-heading">Registrace</h2><hr />
         <input type="text" class="input-block-level" placeholder="Login" name="txtuname" required>
         <input type="email" class="input-block-level" placeholder="Email" name="txtemail" required>
         <input type="password" class="input-block-level" placeholder="Heslo" name="txtpass" required>
-          <label>
-              <input type="radio" class="radio-inline" name="pohlavi" value="M"> Muž
-          </label>
-          <label>
-              <input type="radio" class="radio-inline" name="pohlavi" value="W"> Žena
-          </label>
-     	<hr />
+        <label>
+            <input type="radio" class="radio-inline" name="pohlavi" value="M"> Muž
+        </label>
+        <label>
+            <input type="radio" class="radio-inline" name="pohlavi" value="W"> Žena
+        </label>
+        <hr />
         <button class="btn btn-large btn-primary" type="submit" name="btn-signup">Registrovat</button>
         <a href="index.php" style="float:right;" class="btn btn-large">Přihlásit</a>
-      </form>
+    </form>
 
-    </div>
-    <script src="vendors/jquery-1.9.1.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-  </body>
+</div>
+<script src="vendors/jquery-1.9.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
 </html>
+<?php
+    }
+}
+$class = new registerController();
+$class->start();
