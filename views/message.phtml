@@ -1,8 +1,10 @@
 <?php
 if(isset($msg) && count($msg) > 0)
 {
-    foreach($msg as $text)
+    foreach($msg as $msgData)
     {
-        echo("<div class='alert alert-error'><button class='close' data-dismiss='alert'>&times;</button>" . $text . "</div>");
+        $msgType = $msgData['type'];
+        $msgText = $msgData['text'];
+        echo("<div class='alert alert-error'><button class='close' data-dismiss='alert'>&times;</button>" . $msgText . "</div>");
     }
 }

@@ -23,11 +23,11 @@ class registerController extends basicPublicController
 
             $isValid = true;
             if (USER::existEmail($email)) {
-                $msg[] = 'Na tento email už byl vytvořen účet.';
+                $msg[] = ['type' => 'ERROR', 'text' => 'Na tento email už byl vytvořen účet.'];
                 $isValid = false;
             }
             if (USER::existUserName($uname)) {
-                $msg[] = 'Tento login již existuje.';
+                $msg[] = ['type' => 'ERROR', 'text' => 'Tento login již existuje.'];
                 $isValid = false;
             }
 
@@ -56,7 +56,7 @@ class registerController extends basicPublicController
                 //$mail = new MyMail();
                 //$mail->sendRegisterEmail($user, $code);
 
-                $msg[] = "<strong>Výborně!</strong>  Na adresu {$email} jsme zaslali aktivační link, po kterém bude tvoje registrace platná.";
+                $msg[] = ['type' => 'SUCCESS', 'text' => '<strong>Výborně!</strong>  Na adresu {$email} jsme zaslali aktivační link, po kterém bude tvoje registrace platná.'];
                 //$key = base64_encode($id);
                 /*
                             $message = "Dobrý den $uname,
