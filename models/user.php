@@ -195,6 +195,8 @@ class USER
     {
         $database = new Database();
         $data = $database->getByProperty(USER::TABLE, [USER::COLUMN_USER_EMAIL], USER::COLUMN_USER_EMAIL, $email);
+var_dump($data);
+exit();
         $result = count($data) > 0;
         return $result;
     }
