@@ -29,8 +29,7 @@ class registerController extends basicPublicController
             $soustredeni = 1;
             $znamka = 0;
             $pohlavi = trim($_POST['pohlavi']);
-var_dump('su tu');
-exit();
+
             $isValid = true;
             if (USER::existEmail($email)) {
                 $msg[] = 'Na tento email už byl vytvořen účet.';
@@ -40,7 +39,9 @@ exit();
                 $msg[] = 'Tento login již existuje.';
                 $isValid = false;
             }
-
+var_dump($msg);
+var_dump($isValid);
+exit();
             if ($isValid) {
                 $user = new USER();
                 $user->setUserName($uname);
