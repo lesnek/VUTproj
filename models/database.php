@@ -60,9 +60,11 @@ class Database
         foreach ($data as $key => $value)
         {
             var_dump($key.' => '.$value.'<br/>');
-            $stmt->bindparam(':val_' . $key, $value);
+            $stmt->bindparam('val_' . $key, $value);
         }
-    exit();
+var_dump($sql);
+var_dump($stmt);
+exit();
         $stmt->execute();
         return $stmt;
     }
