@@ -195,16 +195,14 @@ class USER
     {
         $database = new Database();
         $data = $database->getByProperty(USER::TABLE, [USER::COLUMN_USER_EMAIL], USER::COLUMN_USER_EMAIL, $email);
-var_dump($data);
-exit();
-        $result = count($data) > 0;
+        $result = ($data && count($data) > 0);
         return $result;
     }
 
     public static function existUserName($uname) {
         $database = new Database();
         $data = $database->getByProperty(USER::TABLE, [USER::COLUMN_USER_NAME], USER::COLUMN_USER_NAME, $uname);
-        $result = count($data) > 0;
+        $result = ($data && count($data) > 0);
         return $result;
     }
 
