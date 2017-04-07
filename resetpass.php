@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: lesnek
+ * Date: 6.4.17
+ * Time: 2:35
+ */
 require_once 'class.user.php';
 $user = new USER();
 

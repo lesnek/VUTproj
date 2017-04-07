@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: lesnek
+ * Date: 6.4.17
+ * Time: 00:20
+ */
 session_start();
 require_once 'class.user.php';
 $user_home = new USER();
@@ -34,12 +40,12 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                      <span class="icon-bar"></span>
                      <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="#">VUT game</a>
+                    <a class="brand" href="home.php">VUT game</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
                             <li class="dropdown">
-                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> 
-								<?php echo $row['userEmail']; ?> <i class="caret"></i>
+                                <?php echo $row['levl']; ?><a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i>
+								<?php echo $row['userName']; ?> <i class="caret"></i>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>

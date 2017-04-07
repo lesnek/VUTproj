@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: lesnek
+ * Date: 6.4.17
+ * Time: 00:25
+ */
 session_start();
 require_once 'class.user.php';
 
@@ -89,10 +95,10 @@ if(isset($_POST['btn-signup']))
         <input type="text" class="input-block-level" placeholder="Login" name="txtuname" required>
         <input type="email" class="input-block-level" placeholder="Email" name="txtemail" required>
         <input type="password" class="input-block-level" placeholder="Heslo" name="txtpass" required>
-          <label class="radio-inline">
+          <label>
               <input type="radio" class="radio-inline" name="pohlavi" value="M"> Muž
           </label>
-          <label class="radio-inline">
+          <label>
               <input type="radio" class="radio-inline" name="pohlavi" value="W"> Žena
           </label>
      	<hr />
