@@ -28,12 +28,11 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-        <link href="assets/styles.css" rel="stylesheet" media="screen">
-        <?php include_once "navMenu.php"?>
+        <link href="assets/layout.css" rel="stylesheet" media="screen">
     </head>
     
     <body>
-        
+    <?php include_once "navMenu.php"?>
     </body>
 
 </html>

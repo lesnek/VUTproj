@@ -61,7 +61,7 @@ if(isset($_POST['submit']))
     <title>Zapomenuté heslo</title>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-    <link href="assets/styles.css" rel="stylesheet" media="screen">
+    <link href="assets/layout.css" rel="stylesheet" media="screen">
   </head>
   <body id="login">
     <div class="container">

@@ -46,7 +46,7 @@ if(isset($_GET['id']) && isset($_GET['code']))
 						<button class='close' data-dismiss='alert'>&times;</button>
 						Heslo změněno
 						</div>";
-				header("refresh:5;index.php");
+				header("refresh:3;index.php");
 			}
 		}	
 	}
@@ -69,7 +69,7 @@ if(isset($_GET['id']) && isset($_GET['code']))
     <title>Reset hesla</title>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-    <link href="assets/styles.css" rel="stylesheet" media="screen">
+    <link href="assets/layout.css" rel="stylesheet" media="screen">
 
   </head>
   <body id="login">

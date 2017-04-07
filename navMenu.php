@@ -6,7 +6,6 @@
  * Time: 11:00
  */
 ?>
-<body>
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container-fluid">
@@ -59,4 +58,3 @@
 <script src="bootstrap/js/jquery-1.9.1.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/scripts.js"></script>
-</body>
