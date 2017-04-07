@@ -30,19 +30,20 @@ if(isset($_POST['btn-signup']))
 	$znamka = 0;
 	$pohlavi = trim($_POST['pohlavi']);
 
-	$code = md5(uniqid(rand()));
+	$code = sha1(uniqid(rand()));
 	
-	$stmt = $reg_user->runQuery("SELECT * FROM tbl_users WHERE userEmail=:email_id");
+	$stmt = $reg_user->runQuery("SELECT * FROM tbl_users WHERE userEmail=:email_id AND userName=:name_id");
 	$stmt->execute(array(":email_id"=>$email));
+    $stmt->execute(array(":name_id"=>$uname));
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
-	
+
 	if($stmt->rowCount() > 0)
-	{
-		$msg = "<div class='alert alert-error'>
+    {
+        $msg = "<div class='alert alert-error'>
 				<button class='close' data-dismiss='alert'>&times;</button>
 					Na tento email už byl vytvořen účet.
 			  </div>";
-	}
+    }
 	else
 	{
 		if($reg_user->register($uname,$email,$upass,$levl,$zkusenosti,$energie,$stesti,$inteligence,$soustredeni,$znamka,$pohlavi,$code))

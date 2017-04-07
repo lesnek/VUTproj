@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: lesnek
+ * Date: 5.4.17
+ * Time: 23:36
+ */
 
 require_once 'dbconfig.php';
 
@@ -30,7 +36,7 @@ class USER
 	{
 		try
 		{							
-			$password = md5($upass);
+			$password = sha1($upass);
 			$stmt = $this->conn->prepare("INSERT INTO tbl_users(userName,userEmail,userPass,tokenCode,levl,zkusenosti,energie,stesti,inteligence,soustredeni,znamka,pohlavi) 
 			                                             VALUES(:user_name, :user_mail, :user_pass, :active_code, :user_level, :zkusenosti, :energie, :stesti, :inteligence, :soustredeni, :znamka, :pohlavi)");
 			$stmt->bindparam(":user_name",$uname);
@@ -66,7 +72,7 @@ class USER
 			{
 				if($userRow['userStatus']=="Y")
 				{
-					if($userRow['userPass']==md5($upass))
+					if($userRow['userPass']==sha1($upass))
 					{
 						$_SESSION['userSession'] = $userRow['userID'];
 						return true;

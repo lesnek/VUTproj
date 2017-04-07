@@ -42,8 +42,8 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     </a>
                     <a class="brand" href="home.php">VUT game</a>
                     <div class="nav-collapse collapse">
+                        <?php echo $row['levl']; ?>
                         <ul class="nav pull-right">
-                            <?php echo $row['levl']; ?>
                             <li class="dropdown">
                                 <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i>
 								<?php echo $row['userName']; ?> <i class="caret"></i>
