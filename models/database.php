@@ -45,14 +45,15 @@ class Database
 
         $dbResult = $stmt->fetch(PDO::FETCH_ASSOC);
         $dbResult = array_values($dbResult);
-        $result = $dbResult[0];
-var_dump($result);
-exit();
+        $result = (int) $dbResult[0];
+
         return $result;
     }
 
     public function insert($table, $data)
     {
+        var_dump($data);
+        exit();
         $cols = implode(',' , array_keys($data));
         $val  = ':val_' . implode(',:val_' , array_keys($data));
         $sql = 'INSERT INTO ' . $table . ' (' . $cols . ') VALUES (' . $val . ');';
