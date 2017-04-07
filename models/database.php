@@ -52,8 +52,8 @@ class Database
 
     public function insert($table, $data)
     {
-        $cols = implode(',' , array_keys($data));
-        $val  = ':val_' . implode(',:val_' , array_keys($data));
+        $cols = implode(', ' , array_keys($data));
+        $val  = ':val_' . implode(', :val_' , array_keys($data));
         $sql = 'INSERT INTO ' . $table . ' (' . $cols . ') VALUES (' . $val . ');';
 
         $stmt = self::$conn->prepare($sql);
