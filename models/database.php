@@ -53,14 +53,23 @@ class Database
     public function insert($table, $data)
     {
         $cols = implode(', ' , array_keys($data));
-        $val  = ':' . implode(', :' , array_keys($data));
-        $sql = 'INSERT INTO ' . $table . ' (' . $cols . ') VALUES (' . $val . ');';
+        $vals = [];
+        foreach ($data as $item)
+        {
+            $vals[] = '?';
+        }
+        $vals = implode(',', $vals);
+        //$val  = ':' . implode(', :' , array_keys($data));
+        $sql = 'INSERT INTO ' . $table . ' (' . $cols . ') VALUES (' . $vals . ');';
 
         $stmt = self::$conn->prepare($sql);
+
+        $i = 1;
         foreach ($data as $key => $value)
         {
-var_dump($key.' => '.$value.'<br/>');
-            $stmt->bindParam(":" . $key, $value);
+            //$stmt->bindParam(":" . $key, $value);
+            $stmt->bindParam($i, $value);
+            $i++;
         }
 var_dump($stmt->queryString);
 var_dump($stmt->debugDumpParams());
