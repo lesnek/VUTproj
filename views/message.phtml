@@ -5,6 +5,13 @@ if(isset($msg) && count($msg) > 0)
     {
         $msgType = $msgData['type'];
         $msgText = $msgData['text'];
-        echo("<div class='alert alert-error'><button class='close' data-dismiss='alert'>&times;</button>" . $msgText . "</div>");
+        if($msgType == 'ERROR')
+        {
+            echo("<div class='alert alert-error'><button class='close' data-dismiss='alert'>&times;</button>" . $msgText . "</div>");
+        }
+        else if($msgType == 'SUCCESS')
+        {
+            echo("<div class='alert alert-success'><button class='close' data-dismiss='alert'>&times;</button>" . $msgText . "</div>");
+        }
     }
 }

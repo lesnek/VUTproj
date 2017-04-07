@@ -56,7 +56,7 @@ class registerController extends basicPublicController
                 //$mail = new MyMail();
                 //$mail->sendRegisterEmail($user, $code);
 
-                $msg[] = ['type' => 'SUCCESS', 'text' => '<strong>Výborně!</strong>  Na adresu {$email} jsme zaslali aktivační link, po kterém bude tvoje registrace platná.'];
+                $msg[] = ['type' => 'SUCCESS', 'text' => '<strong>Výborně!</strong>  Na adresu ' . $email . ' jsme zaslali aktivační link, po kterém bude tvoje registrace platná.'];
                 //$key = base64_encode($id);
                 /*
                             $message = "Dobrý den $uname,
