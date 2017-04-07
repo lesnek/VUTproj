@@ -134,7 +134,38 @@ class USER
 
 		return $result;
 	}
-	
+
+	public function save()
+    {
+        $result = null;
+
+        try
+        {
+            $id = $this->getId();
+
+            $data = [USER::COLUMN_USER_NAME   => $this->getUserName(),
+                     USER::COLUMN_USER_EMAIL  => $this->getUserEmail(),
+                     USER::COLUMN_USER_PASS   => $this->getUserPassword(),
+                     USER::COLUMN_TOKEN_CODE  => $this->getTokenCode(),
+                     USER::COLUMN_LEVL        => $this->getLevl(),
+                     USER::COLUMN_ZKUSENOSTI  => $this->getZkusenosti(),
+                     USER::COLUMN_ENERGIE     => $this->getEnergie(),
+                     USER::COLUMN_STESTI      => $this->getStesti(),
+                     USER::COLUMN_INTELIGENCE => $this->getInteligence(),
+                     USER::COLUMN_SOUSTREDENI => $this->getSoustredeni(),
+                     USER::COLUMN_ZNAMKA      => $this->getZnamka(),
+                     USER::COLUMN_POHLAVI     => $this->getPohlavi()
+            ];
+            $result = $this->database->update(USER::TABLE, $data, $id);
+        }
+        catch(PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
+
+        return $result;
+    }
+
 	public function login($email)
 	{
 		try

@@ -48,13 +48,13 @@ class registerController extends basicPublicController
                 $user->setPohlavi(trim($_POST['pohlavi']));
                 $user->register();
 
-                $id = $user->getId();
+                //$id = $user->getId();
                 $code = sha1(uniqid(rand()));
                 $user->setTokenCode($code);
-                //$user->save();
+                $user->save();
 
-                //$mail = new MyMail();
-                //$mail->sendRegisterEmail($user, $code);
+                $mail = new MyMail();
+                $mail->sendRegisterEmail($user, $code);
 
                 $msg[] = ['type' => 'SUCCESS', 'text' => '<strong>Výborně!</strong>  Na adresu ' . $email . ' jsme zaslali aktivační link, po kterém bude tvoje registrace platná.'];
                 //$key = base64_encode($id);

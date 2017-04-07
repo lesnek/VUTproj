@@ -66,6 +66,26 @@ class Database
         return $stmt;
     }
 
+    public function update($table, $data, $id)
+    {
+        var_dump('vytvori UPDATE sql query na zaklade table, a data, s tim ze v where bude id = $id');
+        exit();
+        /*
+        $cols = implode(', ' , array_keys($data));
+        $vals  = ':val_' . implode(', :val_' , array_keys($data));
+        $sql = 'INSERT INTO ' . $table . ' (' . $cols . ') VALUES (' . $vals . ');';
+
+        $stmt = self::$conn->prepare($sql);
+
+        foreach ($data as $key => $value)
+        {
+            $stmt->bindValue(":val_" . $key, $value);
+        }
+        $stmt->execute();
+        return $stmt;
+        */
+    }
+
     public function getByProperty($table, $columns, $propertyColumn, $propertyValue)
     {
         $result = null;
