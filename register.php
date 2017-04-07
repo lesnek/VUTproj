@@ -90,10 +90,10 @@ if(isset($_POST['btn-signup']))
         <input type="email" class="input-block-level" placeholder="Email" name="txtemail" required>
         <input type="password" class="input-block-level" placeholder="Heslo" name="txtpass" required>
           <label class="radio-inline">
-              <input type="radio" name="pohlavi" value="M"> Muž
+              <input type="radio" class="radio-inline" name="pohlavi" value="M"> Muž
           </label>
           <label class="radio-inline">
-              <input type="radio" name="pohlavi" value="W"> Žena
+              <input type="radio" class="radio-inline" name="pohlavi" value="W"> Žena
           </label>
      	<hr />
         <button class="btn btn-large btn-primary" type="submit" name="btn-signup">Registrovat</button>
