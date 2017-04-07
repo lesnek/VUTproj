@@ -14,7 +14,7 @@ class Database
     private $password = "Lesnek95";
 
     /** @var PDO $conn **/
-    private $conn     = null;
+    static private $conn = null;
 
     public function __construct()
     {
@@ -25,13 +25,28 @@ class Database
 	{
         try
 		{
-            $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
-			$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);	
+		    if (!self::$conn instanceof PDO) {
+                self::$conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
+                self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            }
         }
 		catch(PDOException $exception)
 		{
             echo "Chyba databáze: " . $exception->getMessage();
         }
+    }
+
+    public function getLastId()
+    {
+        $sql = 'SELECT LAST_INSERT_ID()';
+
+        $stmt = self::$conn->prepare($sql);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+var_dump($result);
+exit();
+        return $result;
     }
 
     public function insert($table, $data)
@@ -40,7 +55,7 @@ class Database
         $val  = ':val_' . implode(',:val_' , array_keys($data));
         $sql = 'INSERT INTO ' . $table . ' (' . $cols . ') VALUES (' . $val . ');';
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::$conn->prepare($sql);
         foreach ($data as $key => $value)
         {
             $stmt->bindparam(':val_' . $key, $value);
@@ -55,7 +70,7 @@ class Database
 
         $sql = 'SELECT ' . implode(',', $columns) . ' FROM ' . $table . ' WHERE ' . $propertyColumn . '=:val_' . $propertyColumn;
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = self::$conn->prepare($sql);
         $stmt->bindparam(':val_' . $propertyColumn, $propertyValue);
         $stmt->execute();
 

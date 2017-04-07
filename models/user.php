@@ -6,13 +6,15 @@
  * Time: 23:36
  */
 
-require_once 'dbconfig.php';
+require_once 'database.php';
 
 class USER
 {
     const IS_ACTIVATE         = 'Y';
+    const IS_NOT_ACTIVATE     = 'N';
     const TABLE               = 'tbl_users';
 
+    const COLUMN_ID           = 'id';
     const COLUMN_USER_NAME    = 'userName';
     const COLUMN_USER_EMAIL   = 'userEmail';
     const COLUMN_USER_PASS    = 'userPass';
@@ -28,7 +30,8 @@ class USER
 
 	private $database = null;
 
-    private $columns = [USER::COLUMN_USER_NAME,
+    private $columns = [USER::COLUMN_ID,
+                        USER::COLUMN_USER_NAME,
                         USER::COLUMN_USER_EMAIL,
                         USER::COLUMN_USER_PASS,
                         USER::COLUMN_TOKEN_CODE,
@@ -42,6 +45,7 @@ class USER
                         USER::COLUMN_POHLAVI,
                        ];
 
+    private $id           = null;
 	private $userName     = null;
     private $userEmail    = null;
     private $userPassword = null;
@@ -61,6 +65,7 @@ class USER
     }
 
     /* setry */
+    public function setId($value)           { $this->id = $value; }
     public function setUserName($value)     { $this->userName = $value; }
     public function setUserEmail($value)    { $this->userEmail = $value; }
     public function setUserPassword($value) { $this->userPassword = sha1($value); }
@@ -75,6 +80,7 @@ class USER
     public function setPohlavi($value)      { $this->pohlavi = $value; }
 
     /* getry */
+    public function getId()                 { return $this->id; }
     public function getUserName()           { return $this->userName; }
     public function getUserEmail()          { return $this->userEmail; }
     public function getUserPassword()       { return $this->userPassword; }
@@ -108,6 +114,9 @@ class USER
                      USER::COLUMN_POHLAVI     => $this->getPohlavi()
                     ];
 		    $result = $this->database->insert(USER::TABLE, $data);
+
+		    $id = $this->database->getLastId();
+		    $this->setId($id);
 		}
 		catch(PDOException $ex)
 		{
@@ -157,17 +166,14 @@ class USER
 	}
 	
 	
-	public static function is_logged_in()
+	public static function isLoggedIn()
 	{
+	    $result = false;
 		if(isset($_SESSION['userSession']))
 		{
-			return true;
+            $result = true;
 		}
-	}
-	
-	public function redirect($url)
-	{
-		header("Location: $url");
+		return $result;
 	}
 	
 	public function logout()
@@ -175,10 +181,27 @@ class USER
 		session_destroy();
 		$_SESSION['userSession'] = false;
 	}
-	
+
+    public static function existEmail($email)
+    {
+        $database = new Database();
+        $data = $database->getByProperty(USER::TABLE, [USER::COLUMN_USER_EMAIL], USER::COLUMN_USER_EMAIL, $email);
+        $result = count($data) > 0;
+        return $result;
+    }
+
+    public static function existUserName($uname) {
+        $database = new Database();
+        $data = $database->getByProperty(USER::TABLE, [USER::COLUMN_USER_NAME], USER::COLUMN_USER_NAME, $uname);
+        $result = count($data) > 0;
+        return $result;
+    }
+
+
+
 	function send_mail($email,$message,$subject)
 	{						
-		require_once('mailer/class.phpmailer.php');
+		require_once(__DIR__ . '/../mailer/class.phpmailer.php');
 		$mail = new PHPMailer();
 		$mail->IsSMTP(); 
 		$mail->SMTPDebug  = 0;                     

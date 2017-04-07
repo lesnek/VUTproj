@@ -6,7 +6,7 @@
  * Time: 20:20
  */
 session_start();
-require_once 'class.user.php';
+require_once 'user.php';
 $user_login = new USER();
 
 if($user_login->is_logged_in()!="")
