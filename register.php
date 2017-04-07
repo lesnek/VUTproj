@@ -49,10 +49,15 @@ class registerController extends basicPublicController
                 $user->register();
 
                 $id = $user->getId();
-echo($id);
-exit();
-                $key = base64_encode($id);
                 $code = sha1(uniqid(rand()));
+                $user->setTokenCode($code);
+                //$user->save();
+
+                //$mail = new MyMail();
+                //$mail->sendRegisterEmail($user, $code);
+
+                $msg[] = "<strong>Výborně!</strong>  Na adresu {$email} jsme zaslali aktivační link, po kterém bude tvoje registrace platná.";
+                //$key = base64_encode($id);
                 /*
                             $message = "Dobrý den $uname,
                                         <br /><br />
@@ -66,17 +71,6 @@ exit();
                             $subject = "Potvrďte registracu";
 
                             $reg_user->send_mail($email, $message, $subject);
-                            $msg = "<div class='alert alert-success'>
-                                        <button class='close' data-dismiss='alert'>&times;</button>
-                                        <strong>Výborně!</strong>  Na adresu $email
-                                    jsme zaslali aktivační link, po kterém bude tvoje registrace platná.
-                                    </div>
-                                    ";
-                        } else {
-                            echo "Omlouváme se nastala chyba";
-                        }
-                    }
-                }
                 */
             }
         }
