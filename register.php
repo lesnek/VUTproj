@@ -32,9 +32,10 @@ if(isset($_POST['btn-signup']))
 
 	$code = sha1(uniqid(rand()));
 	
-	$stmt = $reg_user->runQuery("SELECT * FROM tbl_users WHERE userEmail=:email_id");
-	$stmt->execute(array(":email_id"=>$email));
+	$stmt = $reg_user->runQuery("SELECT * FROM tbl_users WHERE userEmail=" . $email);
+    $stmt2 = $reg_user->runQuery("SELECT * FROM tbl_users WHERE userName=" . $uname);
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
 	if($stmt->rowCount() > 0)
     {

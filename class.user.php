@@ -9,72 +9,127 @@
 require_once 'dbconfig.php';
 
 class USER
-{	
+{
+    const IS_ACTIVATE         = 'Y';
+    const TABLE               = 'tbl_users';
 
-	private $conn;
-	
-	public function __construct()
-	{
-		$database = new Database();
-		$db = $database->dbConnection();
-		$this->conn = $db;
+    const COLUMN_USER_NAME    = 'userName';
+    const COLUMN_USER_EMAIL   = 'userEmail';
+    const COLUMN_USER_PASS    = 'userPass';
+    const COLUMN_TOKEN_CODE   = 'tokenCode';
+    const COLUMN_LEVL         = 'levl';
+    const COLUMN_ZKUSENOSTI   = 'zkusenosti';
+    const COLUMN_ENERGIE      = 'energie';
+    const COLUMN_STESTI       = 'stesti';
+    const COLUMN_INTELIGENCE  = 'inteligence';
+    const COLUMN_SOUSTREDENI  = 'soustredeni';
+    const COLUMN_ZNAMKA       = 'znamka';
+    const COLUMN_POHLAVI      = 'pohlavi';
+
+	private $database = null;
+
+    private $columns = [USER::COLUMN_USER_NAME,
+                        USER::COLUMN_USER_EMAIL,
+                        USER::COLUMN_USER_PASS,
+                        USER::COLUMN_TOKEN_CODE,
+                        USER::COLUMN_LEVL,
+                        USER::COLUMN_ZKUSENOSTI,
+                        USER::COLUMN_ENERGIE,
+                        USER::COLUMN_STESTI,
+                        USER::COLUMN_INTELIGENCE,
+                        USER::COLUMN_SOUSTREDENI,
+                        USER::COLUMN_ZNAMKA,
+                        USER::COLUMN_POHLAVI,
+                       ];
+
+	private $userName     = null;
+    private $userEmail    = null;
+    private $userPassword = null;
+    private $token_code   = null;
+    private $levl         = null;
+    private $zkusenosti   = null;
+    private $energie      = null;
+    private $stesti       = null;
+    private $inteligence  = null;
+    private $soustredeni  = null;
+    private $znamka       = null;
+    private $pohlavi      = null;
+
+    public function __construct()
+    {
+        $this->database = new Database();
     }
-	
-	public function runQuery($sql)
+
+    /* setry */
+    public function setUserName($value)     { $this->userName = $value; }
+    public function setUserEmail($value)    { $this->userEmail = $value; }
+    public function setUserPassword($value) { $this->userPassword = sha1($value); }
+    public function setTokenCode($value)    { $this->token_code = $value; }
+    public function setLevl($value)         { $this->levl = $value; }
+    public function setZkusenosti($value)   { $this->zkusenosti = $value; }
+    public function setEnergie($value)      { $this->energie = $value; }
+    public function setStesti($value)       { $this->stesti = $value; }
+    public function setInteligence($value)  { $this->inteligence = $value; }
+    public function setSoustredeni($value)  { $this->soustredeni = $value; }
+    public function setZnamka($value)       { $this->znamka = $value; }
+    public function setPohlavi($value)      { $this->pohlavi = $value; }
+
+    /* getry */
+    public function getUserName()           { return $this->userName; }
+    public function getUserEmail()          { return $this->userEmail; }
+    public function getUserPassword()       { return $this->userPassword; }
+    public function getTokenCode()          { return $this->token_code; }
+    public function getLevl()               { return $this->levl; }
+    public function getZkusenosti()         { return $this->zkusenosti; }
+    public function getEnergie()            { return $this->energie; }
+    public function getStesti()             { return $this->stesti; }
+    public function getInteligence()        { return $this->inteligence; }
+    public function getSoustredeni()        { return $this->soustredeni; }
+    public function getZnamka()             { return $this->znamka; }
+    public function getPohlavi()            { return $this->pohlavi; }
+
+	public function register()
 	{
-		$stmt = $this->conn->prepare($sql);
-		return $stmt;
-	}
-	
-	public function lasdID()
-	{
-		$stmt = $this->conn->lastInsertId();
-		return $stmt;
-	}
-	
-	public function register($uname,$email,$upass,$levl,$zkusenosti,$energie,$stesti,$inteligence,$soustredeni,$znamka,$pohlavi,$code)
-	{
+        $result = null;
+
 		try
-		{							
-			$password = sha1($upass);
-			$stmt = $this->conn->prepare("INSERT INTO tbl_users(userName,userEmail,userPass,tokenCode,levl,zkusenosti,energie,stesti,inteligence,soustredeni,znamka,pohlavi) 
-			                                             VALUES(:user_name, :user_mail, :user_pass, :active_code, :user_level, :zkusenosti, :energie, :stesti, :inteligence, :soustredeni, :znamka, :pohlavi)");
-			$stmt->bindparam(":user_name",$uname);
-			$stmt->bindparam(":user_mail",$email);
-			$stmt->bindparam(":user_pass",$password);
-			$stmt->bindparam(":active_code",$code);
-			$stmt->bindParam(":user_level",$levl);
-            $stmt->bindParam(":zkusenosti",$zkusenosti);
-            $stmt->bindParam(":energie",$energie);
-            $stmt->bindParam(":stesti",$stesti);
-            $stmt->bindParam(":inteligence",$inteligence);
-            $stmt->bindParam(":soustredeni",$soustredeni);
-            $stmt->bindParam(":znamka",$znamka);
-            $stmt->bindParam(":pohlavi",$pohlavi);
-			$stmt->execute();	
-			return $stmt;
+		{
+            $data = [USER::COLUMN_USER_NAME   => $this->getUserName(),
+                     USER::COLUMN_USER_EMAIL  => $this->getUserEmail(),
+                     USER::COLUMN_USER_PASS   => $this->getUserPassword(),
+                     USER::COLUMN_TOKEN_CODE  => $this->getTokenCode(),
+                     USER::COLUMN_LEVL        => $this->getLevl(),
+                     USER::COLUMN_ZKUSENOSTI  => $this->getZkusenosti(),
+                     USER::COLUMN_ENERGIE     => $this->getEnergie(),
+                     USER::COLUMN_STESTI      => $this->getStesti(),
+                     USER::COLUMN_INTELIGENCE => $this->getInteligence(),
+                     USER::COLUMN_SOUSTREDENI => $this->getSoustredeni(),
+                     USER::COLUMN_ZNAMKA      => $this->getZnamka(),
+                     USER::COLUMN_POHLAVI     => $this->getPohlavi()
+                    ];
+		    $result = $this->database->insert(USER::TABLE, $data);
 		}
 		catch(PDOException $ex)
 		{
 			echo $ex->getMessage();
 		}
+
+		return $result;
 	}
 	
-	public function login($email,$upass)
+	public function login($email)
 	{
 		try
 		{
-			$stmt = $this->conn->prepare("SELECT * FROM tbl_users WHERE userEmail=:email_id");
-			$stmt->execute(array(":email_id"=>$email));
-			$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
-			
-			if($stmt->rowCount() == 1)
-			{
-				if($userRow['userStatus']=="Y")
+		    $data = $this->database->getByProperty(USER::TABLE, $this->columns, USER::COLUMN_USER_EMAIL, $email);
+
+		    if(count($data) > 0)
+            {
+				if($data[USER::COLUMN_TOKEN_CODE] == USER::IS_ACTIVATE)
 				{
-					if($userRow['userPass']==sha1($upass))
+					if($data[USER::COLUMN_USER_PASS] == $this->getUserPassword())
 					{
-						$_SESSION['userSession'] = $userRow['userID'];
+						$_SESSION['userSession'] = $data['userID'];
 						return true;
 					}
 					else
@@ -102,7 +157,7 @@ class USER
 	}
 	
 	
-	public function is_logged_in()
+	public static function is_logged_in()
 	{
 		if(isset($_SESSION['userSession']))
 		{

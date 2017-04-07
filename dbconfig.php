@@ -8,16 +8,21 @@
 class Database
 {
      
-    private $host = "localhost";
-    private $db_name = "czsuprweb";
+    private $host     = "localhost";
+    private $db_name  = "czsuprweb";
     private $username = "czsuprweb";
     private $password = "Lesnek95";
-    public $conn;
-     
-    public function dbConnection()
+
+    /** @var PDO $conn **/
+    private $conn     = null;
+
+    public function __construct()
+    {
+        $this->dbConnect();
+    }
+
+    public function dbConnect()
 	{
-     
-	    $this->conn = null;    
         try
 		{
             $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
@@ -27,7 +32,35 @@ class Database
 		{
             echo "Chyba databáze: " . $exception->getMessage();
         }
-         
-        return $this->conn;
+    }
+
+    public function insert($table, $data)
+    {
+        $cols = implode(',' , array_keys($data));
+        $val  = ':val_' . implode(',:val_' , array_keys($data));
+        $sql = 'INSERT INTO ' . $table . ' (' . $cols . ') VALUES (' . $val . ');';
+
+        $stmt = $this->conn->prepare($sql);
+        foreach ($data as $key => $value)
+        {
+            $stmt->bindparam(':val_' . $key, $value);
+        }
+        $stmt->execute();
+        return $stmt;
+    }
+
+    public function getByProperty($table, $columns, $propertyColumn, $propertyValue)
+    {
+        $result = null;
+
+        $sql = 'SELECT ' . implode(',', $columns) . ' FROM ' . $table . ' WHERE ' . $propertyColumn . '=:val_' . $propertyColumn;
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindparam(':val_' . $propertyColumn, $propertyValue);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
     }
 }
