@@ -39,9 +39,7 @@ class registerController extends basicPublicController
                 $msg[] = 'Tento login již existuje.';
                 $isValid = false;
             }
-var_dump($msg);
-var_dump($isValid);
-exit();
+
             if ($isValid) {
                 $user = new USER();
                 $user->setUserName($uname);
