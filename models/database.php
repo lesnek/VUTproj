@@ -43,7 +43,9 @@ class Database
         $stmt = self::$conn->prepare($sql);
         $stmt->execute();
 
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $dbResult = $stmt->fetch(PDO::FETCH_ASSOC);
+        $dbResult = array_values($dbResult);
+        $result = $dbResult[0];
 var_dump($result);
 exit();
         return $result;
