@@ -7,6 +7,7 @@
  */
 session_start();
 require_once 'models/user.php';
+require_once 'basicPublicController.php';
 
 class registerController extends basicPublicController
 {
