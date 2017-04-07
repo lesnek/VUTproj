@@ -58,15 +58,10 @@ class Database
 
         $stmt = self::$conn->prepare($sql);
 
-        $i = 1;
         foreach ($data as $key => $value)
         {
             $stmt->bindValue(":val_" . $key, $value);
         }
-var_dump($stmt->queryString);
-var_dump($stmt->debugDumpParams());
-var_dump($sql);
-var_dump($stmt);
         $stmt->execute();
         return $stmt;
     }
