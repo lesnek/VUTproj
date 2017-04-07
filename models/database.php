@@ -62,6 +62,7 @@ class Database
             var_dump($key.' => '.$value.'<br/>');
             $stmt->bindParam(':val_' . $key, $value);
         }
+var_dump($stmt->queryString);
 var_dump($stmt->debugDumpParams());
 var_dump($sql);
 var_dump($stmt);
