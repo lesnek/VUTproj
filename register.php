@@ -48,30 +48,14 @@ class registerController extends basicPublicController
                 $user->setPohlavi(trim($_POST['pohlavi']));
                 $user->register();
 
-                //$id = $user->getId();
                 $code = sha1(uniqid(rand()));
-                $user->setTokenCode($code);
-                $user->save();
+//                $user->setTokenCode($code);
+//                $user->save();
 
                 $mail = new MyMail();
                 $mail->sendRegisterEmail($user, $code);
 
                 $msg[] = ['type' => 'SUCCESS', 'text' => '<strong>Výborně!</strong>  Na adresu ' . $email . ' jsme zaslali aktivační link, po kterém bude tvoje registrace platná.'];
-                //$key = base64_encode($id);
-                /*
-                            $message = "Dobrý den $uname,
-                                        <br /><br />
-                                        Vítejte v naší malé VUT hře<br/>
-                                        Pro registraci pokračujte přes odkaz níže<br/>
-                                        <br /><br />
-                                        <a href='http://www.suprweb.php5.cz/verify.php?id=$key&code=$code'>Klikněte zde pro aktivaci vašeho účtu</a>
-                                        <br /><br />
-                                        Děkujeme za registraci";
-
-                            $subject = "Potvrďte registracu";
-
-                            $reg_user->send_mail($email, $message, $subject);
-                */
             }
         }
 

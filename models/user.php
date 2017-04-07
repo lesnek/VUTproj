@@ -237,25 +237,4 @@ class USER
         return $result;
     }
 
-
-
-	function send_mail($email,$message,$subject)
-	{						
-		require_once(__DIR__ . '/../mailer/class.phpmailer.php');
-		$mail = new PHPMailer();
-		$mail->IsSMTP(); 
-		$mail->SMTPDebug  = 0;                     
-		$mail->SMTPAuth   = true;                  
-		$mail->SMTPSecure = "ssl";                 
-		$mail->Host       = "smtp.seznam.cz";
-		$mail->Port       = 465;             
-		$mail->AddAddress($email);
-		$mail->Username="vutgame@email.cz";
-		$mail->Password="studentvpn";
-		$mail->SetFrom('vutgame@email.cz','VUTgame');
-		$mail->AddReplyTo("vutgame@email.cz","VUTgame");
-		$mail->Subject    = $subject;
-		$mail->MsgHTML($message);
-		$mail->Send();
-	}	
 }
