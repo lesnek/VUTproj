@@ -24,7 +24,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 <html class="no-js">
     
     <head>
-        <title><?php echo $row['userEmail']; ?></title>
+        <title>VUTgame | <?php echo $row['userName']; ?></title>
 
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -42,10 +42,9 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     </a>
                     <a class="brand" href="home.php">VUT game</a>
                     <div class="nav-collapse collapse">
-                        <?php echo $row['levl']; ?>
                         <ul class="nav pull-right">
                             <li class="dropdown">
-                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i>
+                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><?php echo $row['levl']; ?>  <i class="icon-user"></i>
 								<?php echo $row['userName']; ?> <i class="caret"></i>
                                 </a>
                                 <ul class="dropdown-menu">
