@@ -6,17 +6,14 @@
  * Time: 00:20
  */
 session_start();
-require_once 'user.php';
+require_once 'models/user.php';
 $user_home = new USER();
+$basic = new basicPublicController();
 
-if(!$user_home->is_logged_in())
+if(!$user_home->isloggedIn())
 {
-	$user_home->redirect('index.php');
+	$basic->redirect('index.php');
 }
-
-$stmt = $user_home->runQuery("SELECT * FROM tbl_users WHERE userID=:uid");
-$stmt->execute(array(":uid"=>$_SESSION['userSession']));
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -24,7 +21,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 <html class="no-js">
     
     <head>
-        <title>VUTgame | <?php echo $row['userName']; ?></title>
+        <title>VUTgame</title>
 
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
