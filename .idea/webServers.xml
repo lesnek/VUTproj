@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="325c0ae9-eeb0-45eb-a1e6-048d71412040" name="Suprweb" url="http://suprweb.php5.cz">
+      <webServer id="325c0ae9-eeb0-45eb-a1e6-048d71412040" name="Suprwebphp" url="http://suprweb.php5.cz">
         <fileTransfer host="suprweb.php5.cz" port="21" rootFolder="/public_html">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />

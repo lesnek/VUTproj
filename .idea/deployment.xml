@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="Suprweb" uploadOnCheckin="325c0ae9-eeb0-45eb-a1e6-048d71412040">
+  <component name="PublishConfigData" serverName="Suprwebphp" uploadOnCheckin="325c0ae9-eeb0-45eb-a1e6-048d71412040">
     <serverData>
-      <paths name="Suprweb">
+      <paths name="Suprwebphp">
         <serverdata>
           <mappings>
             <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
