@@ -8,11 +8,10 @@
 session_start();
 require_once 'models/user.php';
 $user_home = new USER();
-$basic = new basicPublicController();
 
 if(!$user_home->isloggedIn())
 {
-	$basic->redirect('index.php');
+	$user_home->redirect('index.php');
 }
 
 ?>

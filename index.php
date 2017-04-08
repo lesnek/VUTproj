@@ -9,7 +9,7 @@ session_start();
 require_once 'models/user.php';
 $user_login = new USER();
 
-if($user_login->is_logged_in()!="")
+if($user_login->isLoggedIn()!=="")
 {
 	$user_login->redirect('home.php');
 }
@@ -19,7 +19,7 @@ if(isset($_POST['login']))
 	$email = trim($_POST['txtemail']);
 	$upass = trim($_POST['txtupass']);
 	
-	if($user_login->login($email,$upass))
+	if($user_login->login($email))
 	{
 		$user_login->redirect('home.php');
 	}

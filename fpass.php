@@ -6,20 +6,22 @@
  * Time: 1:01
  */
 session_start();
-require_once 'user.php';
-$user = new USER();
+require_once 'models/user.php';
+require_once 'basicPublicController.php';
 
-if($user->is_logged_in()!="")
+$user = new USER();
+$basic = new basicPublicController();
+
+if($user->isLoggedIn()!="")
 {
-	$user->redirect('home.php');
+	$basic->redirect('home.php');
 }
 
 if(isset($_POST['submit']))
 {
 	$email = $_POST['txtemail'];
 	
-	$stmt = $user->runQuery("SELECT userID FROM tbl_users WHERE userEmail=:email LIMIT 1");
-	$stmt->execute(array(":email"=>$email));
+	$stmt = $user->getUserEmail();
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);	
 	if($stmt->rowCount() == 1)
 	{

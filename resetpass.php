@@ -5,7 +5,8 @@
  * Date: 6.4.17
  * Time: 2:35
  */
-require_once 'user.php';
+require_once 'models/user.php';
+require_once '';
 $user = new USER();
 
 if(empty($_GET['id']) && empty($_GET['code']))

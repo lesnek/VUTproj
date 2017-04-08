@@ -8,7 +8,7 @@
 
 require_once 'database.php';
 
-class USER
+class USER extends basicPublicController
 {
     const IS_ACTIVATE         = 'Y';
     const IS_NOT_ACTIVATE     = 'N';

@@ -8,6 +8,7 @@
 session_start();
 require_once 'models/user.php';
 require_once 'basicPublicController.php';
+require_once 'models/myMail.php';
 
 class registerController extends basicPublicController
 {
@@ -52,6 +53,7 @@ class registerController extends basicPublicController
 //                $user->setTokenCode($code);
 //                $user->save();
 
+                require_once 'models/myMail.php';
                 $mail = new MyMail();
                 $mail->sendRegisterEmail($user, $code);
 

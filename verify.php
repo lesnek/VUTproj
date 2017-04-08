@@ -5,12 +5,15 @@
  * Date: 6.4.17
  * Time: 1:15
  */
-require_once 'user.php';
+require_once 'models/user.php';
+require_once 'basicPublicController.php';
+
 $user = new USER();
+$basic = new basicPublicController();
 
 if(empty($_GET['id']) && empty($_GET['code']))
 {
-	$user->redirect('index.php');
+	$basic->redirect('index.php');
 }
 
 if(isset($_GET['id']) && isset($_GET['code']))
