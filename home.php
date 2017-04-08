@@ -21,7 +21,7 @@ if(!$user_home->isloggedIn())
 <html class="no-js">
     
     <head>
-        <title>VUTgame</title>
+        <title>VUTgame1</title>
 
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
