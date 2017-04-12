@@ -21,26 +21,12 @@ if(isset($_POST['submit']))
 {
 	$email = $_POST['txtemail'];
 	
-	$stmt = $user->getUserEmail();
-	$row = $stmt->fetch(PDO::FETCH_ASSOC);	
-	if($stmt->rowCount() == 1)
+	$emailVerify = $user->getUserEmail();
+	$code = $user->getTokenCode();
+	if($email == $emailVerify)
 	{
-		$id = base64_encode($row['userID']);
-		$code = sha1(uniqid(rand()));
-		
-		$stmt = $user->runQuery("UPDATE tbl_users SET tokenCode=:token WHERE userEmail=:email");
-		$stmt->execute(array(":token"=>$code,"email"=>$email));
-		
-		$message= "Dobrý den, $email
-				   <br /><br />
-				   Byl nám zaslán dotaz o obnovení hesla pro účet registrovaný na adresu $email,
-				   <br /><br />
-				   Klikněte prosím níže pro resetování hesla:
-				   <br /><br />
-				   <a href='http://www.suprweb.php5.cz/resetpass.php?id=$id&code=$code'>Resetovat heslo</a>";
-		$subject = "Password Reset";
-		
-		$user->send_mail($email,$message,$subject);
+		$mail = new MyMail();
+		$mail->sendForgotPassword($user, $code);
 		
 		$msg = "<div class='alert alert-success'>
 					<button class='close' data-dismiss='alert'>&times;</button>

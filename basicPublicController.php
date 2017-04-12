@@ -17,4 +17,3 @@ class basicPublicController
         header("Location: $url");
     }
 }
-?>

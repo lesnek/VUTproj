@@ -18,8 +18,8 @@
                 <ul class="nav pull-right">
                     <li class="dropdown">
                         <a href="#" role="button" class="dropdown-toggle"
-                           data-toggle="dropdown">lvl <?php echo $row['levl']; ?> <i class="icon-user"></i>
-                            <?php echo $row['userName']; ?> <i class="caret"></i>
+                           data-toggle="dropdown">lvl <?php echo $user->getLevl(); ?> <i class="icon-user"></i>
+                            <?php echo $user->getUserName() ?> <i class="caret"></i>
                         </a>
                         <ul class="dropdown-menu">
                             <li>

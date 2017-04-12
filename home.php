@@ -7,11 +7,13 @@
  */
 session_start();
 require_once 'models/user.php';
+require_once 'basicPublicController.php';
 $user_home = new USER();
+$basic = new basicPublicController();
 
 if(!$user_home->isloggedIn())
 {
-	$user_home->redirect('index.php');
+	$basic->redirect('index.php');
 }
 
 ?>
@@ -20,7 +22,7 @@ if(!$user_home->isloggedIn())
 <html class="no-js">
     
     <head>
-        <title>VUTgame1</title>
+        <title>VUTgame</title>
 
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">

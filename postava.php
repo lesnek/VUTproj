@@ -6,12 +6,14 @@
  * Time: 9:20
  */
 session_start();
-require_once 'user.php';
+require_once 'models/user.php';
+require_once 'basicPublicController.php';
 $user_home = new USER();
+$basic = new basicPublicController();
 
-if(!$user_home->is_logged_in())
+if(!$user_home->isLoggedIn())
 {
-    $user_home->redirect('index.php');
+    $basic->redirect('index.php');
 }
 
 $stmt = $user_home->runQuery("SELECT * FROM tbl_users WHERE userID=:uid");

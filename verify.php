@@ -10,64 +10,36 @@ require_once 'basicPublicController.php';
 
 $user = new USER();
 $basic = new basicPublicController();
+$msg = [];
 
-if(empty($_GET['id']) && empty($_GET['code']))
-{
-	$basic->redirect('index.php');
+if (empty($_GET['id']) && empty($_GET['code'])) {
+    $basic->redirect('index.php');
 }
 
-if(isset($_GET['id']) && isset($_GET['code']))
-{
-	$id = base64_decode($_GET['id']);
-	$code = $_GET['code'];
-	
-	$statusY = "Y";
-	$statusN = "N";
-	
-	$stmt = $user->runQuery("SELECT userID,userStatus FROM tbl_users WHERE userID=:uID AND tokenCode=:code LIMIT 1");
-	$stmt->execute(array(":uID"=>$id,":code"=>$code));
-	$row=$stmt->fetch(PDO::FETCH_ASSOC);
-	if($stmt->rowCount() > 0)
-	{
-		if($row['userStatus']==$statusN)
-		{
-			$stmt = $user->runQuery("UPDATE tbl_users SET userStatus=:status WHERE userID=:uID");
-			$stmt->bindparam(":status",$statusY);
-			$stmt->bindparam(":uID",$id);
-			$stmt->execute();	
-			
-			$msg = "
-		           <div class='alert alert-success'>
-				   <button class='close' data-dismiss='alert'>&times;</button>
-					  <strong>Gratulujeme!</strong>  Účet máš nyní aktivovaný, <a href='index.php'>Zde se přihlaš</a>
-			       </div>
-			       ";	
-		}
-		else
-		{
-			$msg = "
-		           <div class='alert alert-error'>
-				   <button class='close' data-dismiss='alert'>&times;</button>
-					  <strong>STOP!</strong> Tvůj účet je již aktivovaný, <a href='index.php'>raději se rovnou přihlaš</a>
-			       </div>
-			       ";
-		}
-	}
-	else
-	{
-		$msg = "
-		       <div class='alert alert-error'>
-			   <button class='close' data-dismiss='alert'>&times;</button>
-			   <strong>Hups! </strong>Tak tvůj učet tu asi není. <a href='register.php'>Registruj se zde</a>
-			   </div>
-			   ";
-	}	
+if (isset($_GET['id']) && isset($_GET['code'])) {
+    $id = base64_decode($_GET['id']);
+    $code = $_GET['code'];
+
+    $IS_ACTIVATE = 'Y';
+    $IS_NOT_ACTIVATE = 'N';
+
+    if ($user->getId() == $id && $user->getTokenCode() == $code) {
+        if ($user->getUserStatus() == $IS_NOT_ACTIVATE) {
+            $user->setUserStatus($IS_ACTIVATE);
+
+            $msg = ['type' => 'SUCCESS', 'text' => "<strong>Gratulujeme!</strong>  Účet máš nyní aktivovaný, <a href='index.php'>Zde se přihlaš</a></div>"];
+        } else {
+            $msg = ['type' => 'ERROR', 'text' => "<strong>STOP!</strong> Tvůj účet je již aktivovaný, <a href='index.php'>raději se rovnou přihlaš</a></div>"];
+        }
+    } else {
+        $msg = ['type' => 'SUCCESS', 'text' => "<strong>Hups! </strong>Tak tvůj učet tu asi není. <a href='register.php'>Registruj se zde</a></div>"];
+    }
 }
 
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Potvrzení registrace</title>
 
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -75,12 +47,14 @@ if(isset($_GET['id']) && isset($_GET['code']))
     <link href="assets/layout.css" rel="stylesheet" media="screen">
 
     <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-  </head>
-  <body id="login">
-    <div class="container">
-		<?php if(isset($msg)) { echo $msg; } ?>
-    </div>
-    <script src="vendors/jquery-1.9.1.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-  </body>
+</head>
+<body id="login">
+<div class="container">
+    <?php if (isset($msg)) {
+        echo $msg;
+    } ?>
+</div>
+<script src="vendors/jquery-1.9.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
 </html>

@@ -7,11 +7,17 @@
  */
 class Database
 {
-     
+    private $host     = "localhost";
+    private $db_name  = "czsuprweb";
+    private $username = "root";
+    private $password = "";
+
+    /**
     private $host     = "localhost";
     private $db_name  = "czsuprweb";
     private $username = "czsuprweb";
     private $password = "Lesnek95";
+    **/
 
     /** @var PDO $conn **/
     static private $conn = null;

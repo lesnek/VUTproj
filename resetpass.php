@@ -6,12 +6,13 @@
  * Time: 2:35
  */
 require_once 'models/user.php';
-require_once '';
+require_once 'basicPublicController.php';
 $user = new USER();
+$basic = new basicPublicController();
 
 if(empty($_GET['id']) && empty($_GET['code']))
 {
-	$user->redirect('index.php');
+	$basic->redirect('index.php');
 }
 
 if(isset($_GET['id']) && isset($_GET['code']))
@@ -76,7 +77,7 @@ if(isset($_GET['id']) && isset($_GET['code']))
   <body id="login">
     <div class="container">
     	<div class='alert alert-success'>
-			<strong>Ahoj!</strong>  <?php echo $rows['userName'] ?>, na této stránce můžete resetovat heslo
+			<strong>Ahoj!</strong>  <?php echo $user->getUserName(); ?>, na této stránce můžete resetovat heslo
 		</div>
         <form class="form-signin" method="post">
         <h3 class="form-signin-heading">Reset hesla</h3><hr>

@@ -38,8 +38,8 @@ class registerController extends basicPublicController
                 $user->setUserName($uname);
                 $user->setUserEmail($email);
                 $user->setUserPassword(trim($_POST['txtpass']));
-                $user->setTokenCode(USER::IS_NOT_ACTIVATE);
                 $user->setLevl(USER::DEFAULT_LEVL);
+                $user->setUserStatus(USER::IS_NOT_ACTIVATE);
                 $user->setZkusenosti(USER::DEFAULT_ZKUSENOSTI);
                 $user->setEnergie(USER::DEFAULT_ENERGIE);
                 $user->setStesti(USER::DEFAULT_STESTI);
@@ -47,11 +47,11 @@ class registerController extends basicPublicController
                 $user->setSoustredeni(USER::DEFAULT_SOUSTREDENI);
                 $user->setZnamka(USER::DEFAULT_ZNAMKA);
                 $user->setPohlavi(trim($_POST['pohlavi']));
-                $user->register();
-
                 $code = sha1(uniqid(rand()));
-//                $user->setTokenCode($code);
-//                $user->save();
+                var_dump($code);
+                $user->setTokenCode($code);
+                $user->register();
+                //$user->save();
 
                 require_once 'models/myMail.php';
                 $mail = new MyMail();

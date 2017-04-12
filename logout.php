@@ -6,16 +6,17 @@
  * Time: 22:20
  */
 session_start();
-require_once 'user.php';
+require_once 'models/user.php';
+require_once 'basicPublicController.php';
 $user = new USER();
 
-if(!$user->is_logged_in())
+if(!$user->isLoggedIn())
 {
-	$user->redirect('index.php');
+	$basic->redirect('index.php');
 }
 
-if($user->is_logged_in()!="")
+if($user->isLoggedIn())
 {
 	$user->logout();	
-	$user->redirect('index.php');
+	$basic->redirect('index.php');
 }

@@ -6,10 +6,11 @@
  * Time: 23:36
  */
 
-require_once 'database.php';
 
-class USER extends basicPublicController
+class USER
 {
+    /** Konstanty */
+
     const IS_ACTIVATE         = 'Y';
     const IS_NOT_ACTIVATE     = 'N';
 
@@ -28,6 +29,7 @@ class USER extends basicPublicController
     const COLUMN_USER_EMAIL   = 'userEmail';
     const COLUMN_USER_PASS    = 'userPass';
     const COLUMN_TOKEN_CODE   = 'tokenCode';
+    const COLUMN_USER_STATUS  = 'userStatus';
     const COLUMN_LEVL         = 'levl';
     const COLUMN_ZKUSENOSTI   = 'zkusenosti';
     const COLUMN_ENERGIE      = 'energie';
@@ -44,6 +46,7 @@ class USER extends basicPublicController
                         USER::COLUMN_USER_EMAIL,
                         USER::COLUMN_USER_PASS,
                         USER::COLUMN_TOKEN_CODE,
+                        USER::COLUMN_USER_STATUS,
                         USER::COLUMN_LEVL,
                         USER::COLUMN_ZKUSENOSTI,
                         USER::COLUMN_ENERGIE,
@@ -58,7 +61,8 @@ class USER extends basicPublicController
 	private $userName     = null;
     private $userEmail    = null;
     private $userPassword = null;
-    private $token_code   = null;
+    private $tokenCode   = null;
+    private $userStatus   = null;
     private $levl         = null;
     private $zkusenosti   = null;
     private $energie      = null;
@@ -78,7 +82,8 @@ class USER extends basicPublicController
     public function setUserName($value)     { $this->userName = $value; }
     public function setUserEmail($value)    { $this->userEmail = $value; }
     public function setUserPassword($value) { $this->userPassword = sha1($value); }
-    public function setTokenCode($value)    { $this->token_code = $value; }
+    public function setTokenCode($value)    { $this->tokenCode = $value; }
+    public function setUserStatus($value)   { $this->userStatus = $value; }
     public function setLevl($value)         { $this->levl = $value; }
     public function setZkusenosti($value)   { $this->zkusenosti = $value; }
     public function setEnergie($value)      { $this->energie = $value; }
@@ -93,7 +98,8 @@ class USER extends basicPublicController
     public function getUserName()           { return $this->userName; }
     public function getUserEmail()          { return $this->userEmail; }
     public function getUserPassword()       { return $this->userPassword; }
-    public function getTokenCode()          { return $this->token_code; }
+    public function getTokenCode()          { return $this->tokenCode; }
+    public function getUserStatus()         { return $this->userStatus; }
     public function getLevl()               { return $this->levl; }
     public function getZkusenosti()         { return $this->zkusenosti; }
     public function getEnergie()            { return $this->energie; }
@@ -113,6 +119,7 @@ class USER extends basicPublicController
                      USER::COLUMN_USER_EMAIL  => $this->getUserEmail(),
                      USER::COLUMN_USER_PASS   => $this->getUserPassword(),
                      USER::COLUMN_TOKEN_CODE  => $this->getTokenCode(),
+                     USER::COLUMN_USER_STATUS => $this->getUserStatus(),
                      USER::COLUMN_LEVL        => $this->getLevl(),
                      USER::COLUMN_ZKUSENOSTI  => $this->getZkusenosti(),
                      USER::COLUMN_ENERGIE     => $this->getEnergie(),
@@ -147,6 +154,7 @@ class USER extends basicPublicController
                      USER::COLUMN_USER_EMAIL  => $this->getUserEmail(),
                      USER::COLUMN_USER_PASS   => $this->getUserPassword(),
                      USER::COLUMN_TOKEN_CODE  => $this->getTokenCode(),
+                     USER::COLUMN_USER_STATUS => $this->getUserStatus(),
                      USER::COLUMN_LEVL        => $this->getLevl(),
                      USER::COLUMN_ZKUSENOSTI  => $this->getZkusenosti(),
                      USER::COLUMN_ENERGIE     => $this->getEnergie(),
@@ -165,8 +173,37 @@ class USER extends basicPublicController
 
         return $result;
     }
+    public function load($id)
+    {
+        try
+        {
+            $data = $this->database->getByProperty(USER::TABLE, $this->columns, USER::COLUMN_ID, $id);
 
-	public function login($email)
+            if(count($data) > 0)
+            {
+                $this->setId($data[USER::COLUMN_ID]);
+                $this->setUserName($data[USER::COLUMN_USER_NAME]);
+                $this->setUserEmail($data[USER::COLUMN_USER_EMAIL]);
+                $this->setUserPassword($data[USER::COLUMN_USER_PASS]);
+                $this->setTokenCode($data[USER::COLUMN_TOKEN_CODE]);
+                $this->setUserStatus($data[USER::COLUMN_USER_STATUS]);
+                $this->setLevl($data[USER::COLUMN_LEVL]);
+                $this->setZkusenosti($data[USER::COLUMN_ZKUSENOSTI]);
+                $this->setEnergie($data[USER::COLUMN_ENERGIE]);
+                $this->setStesti($data[USER::COLUMN_STESTI]);
+                $this->setInteligence($data[USER::COLUMN_INTELIGENCE]);
+                $this->setSoustredeni($data[USER::COLUMN_SOUSTREDENI]);
+                $this->setZnamka($data[USER::COLUMN_ZNAMKA]);
+                $this->setPohlavi($data[USER::COLUMN_POHLAVI]);
+            }
+
+        }
+        catch (PDOException $ex){
+            echo $ex->getMessage();
+        }
+    }
+
+	public function login($email, $upass)
 	{
 		try
 		{
@@ -174,15 +211,20 @@ class USER extends basicPublicController
 
 		    if(count($data) > 0)
             {
-				if($data[USER::COLUMN_TOKEN_CODE] == USER::IS_ACTIVATE)
+				if($data[USER::COLUMN_USER_STATUS] == USER::IS_ACTIVATE)
 				{
-					if($data[USER::COLUMN_USER_PASS] == $this->getUserPassword())
+					//if($data[USER::COLUMN_USER_PASS] == $this->getUserPassword())
+                    if($data[USER::COLUMN_USER_PASS] == sha1($upass))
 					{
-						$_SESSION['userSession'] = $data['userID'];
+						$_SESSION['userSession'] = $data['id'];
 						return true;
 					}
 					else
 					{
+                        var_dump($data[USER::COLUMN_USER_PASS]);
+                        echo '<br/>';
+                        var_dump($this->getUserPassword());
+                        exit;
 						header("Location: index.php?error");
 						exit;
 					}
@@ -191,21 +233,22 @@ class USER extends basicPublicController
 				{
 					header("Location: index.php?inactive");
 					exit;
-				}	
+				}
 			}
 			else
 			{
+
 				header("Location: index.php?error");
 				exit;
-			}		
+			}
 		}
 		catch(PDOException $ex)
 		{
-			echo $ex->getMessage(); 
+			echo $ex->getMessage();
 		}
 	}
-	
-	
+
+
 	public static function isLoggedIn()
 	{
 	    $result = false;
@@ -215,7 +258,7 @@ class USER extends basicPublicController
 		}
 		return $result;
 	}
-	
+
 	public function logout()
 	{
 		session_destroy();

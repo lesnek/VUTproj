@@ -7,11 +7,13 @@
  */
 session_start();
 require_once 'models/user.php';
+require_once 'basicPublicController.php';
 $user_login = new USER();
+$basic = new basicPublicController();
 
-if($user_login->isLoggedIn()!=="")
+if($user_login->isLoggedIn())
 {
-	$user_login->redirect('home.php');
+	$basic->redirect('home.php');
 }
 
 if(isset($_POST['login']))
@@ -19,9 +21,9 @@ if(isset($_POST['login']))
 	$email = trim($_POST['txtemail']);
 	$upass = trim($_POST['txtupass']);
 	
-	if($user_login->login($email))
+	if($user_login->login($email, $upass))
 	{
-		$user_login->redirect('home.php');
+		$basic->redirect('home.php');
 	}
 }
 ?>
