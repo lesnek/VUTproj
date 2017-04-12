@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="Suprweb" uploadOnCheckin="68e04a93-d3d7-4b4f-b067-4c14e27e95e3">
+  <component name="PublishConfigData" serverName="Suprweb" uploadOnCheckin="325c0ae9-eeb0-45eb-a1e6-048d71412040">
     <serverData>
       <paths name="Seprweb2">
         <serverdata>
@@ -17,6 +17,6 @@
         </serverdata>
       </paths>
     </serverData>
-    <option name="myUploadOnCheckinName" value="Seprweb2" />
+    <option name="myUploadOnCheckinName" value="Suprweb" />
   </component>
 </project>

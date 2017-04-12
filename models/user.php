@@ -6,6 +6,7 @@
  * Time: 23:36
  */
 
+require_once 'database.php';
 
 class USER
 {
