@@ -5,15 +5,40 @@
  * Date: 6.4.17
  * Time: 00:25
  */
-
+session_start();
 class basicPublicController
 {
-    public function start()
+    public $msg = [];
+
+    public function  __construct()
+    {
+    }
+
+    public function run()
     {
     }
 
     public function redirect($url)
     {
         header("Location: $url");
+    }
+
+    public function render($phtmlPath)
+    {
+        include_once "views/header.phtml";
+        include_once "views/" . $phtmlPath;
+        include_once "views/footer.phtml";
+    }
+    public function renderPrivate($phtmlPath)
+    {
+        include_once "views/header.phtml";
+        include_once "views/navMenu.phtml";
+        include_once "views/" . $phtmlPath;
+        include_once "views/footer.phtml";
+    }
+
+    public function renderEmpty($phtmlPath)
+    {
+        include_once "views/" . $phtmlPath;
     }
 }

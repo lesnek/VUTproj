@@ -5,32 +5,18 @@
  * Date: 6.4.17
  * Time: 00:20
  */
-session_start();
+
 require_once 'models/user.php';
-require_once 'basicPublicController.php';
+require_once 'basicPrivateController.php';
 $user_home = new USER();
-$basic = new basicPublicController();
 
-if(!$user_home->isloggedIn())
+class home extends basicPrivateController
 {
-	$basic->redirect('index.php');
+    public function run()
+    {
+        $this->render('home.phtml');
+    }
 }
+$app = new home();
+$app->run();
 
-?>
-
-<!DOCTYPE html>
-<html class="no-js">
-    
-    <head>
-        <title>VUTgame</title>
-
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-        <link href="assets/layout.css" rel="stylesheet" media="screen">
-    </head>
-    
-    <body>
-    <?php include_once "navMenu.php"?>
-    </body>
-
-</html>

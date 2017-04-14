@@ -5,30 +5,28 @@
  * Date: 6.4.17
  * Time: 00:25
  */
-session_start();
 require_once 'models/user.php';
 require_once 'basicPublicController.php';
 require_once 'models/myMail.php';
 
 class registerController extends basicPublicController
 {
-    public function start()
+    public function run()
     {
-        $msg = [];
-
-        parent::start();
+        $phtmlPath = 'registerPage.phtml';
 
         if (isset($_POST['btn-signup'])) {
+
             $uname = trim($_POST['txtuname']);
             $email = trim($_POST['txtemail']);
 
             $isValid = true;
             if (USER::existEmail($email)) {
-                $msg[] = ['type' => 'ERROR', 'text' => 'Na tento email už byl vytvořen účet.'];
+                $this->msg[] = ['type' => 'ERROR', 'text' => 'Na tento email už byl vytvořen účet.'];
                 $isValid = false;
             }
             if (USER::existUserName($uname)) {
-                $msg[] = ['type' => 'ERROR', 'text' => 'Tento login již existuje.'];
+                $this->msg[] = ['type' => 'ERROR', 'text' => 'Tento login již existuje.'];
                 $isValid = false;
             }
 
@@ -37,7 +35,7 @@ class registerController extends basicPublicController
                 $user = new USER();
                 $user->setUserName($uname);
                 $user->setUserEmail($email);
-                $user->setUserPassword(trim($_POST['txtpass']));
+                $user->setUserPassword(sha1(trim($_POST['txtpass'])));
                 $user->setLevl(USER::DEFAULT_LEVL);
                 $user->setUserStatus(USER::IS_NOT_ACTIVATE);
                 $user->setZkusenosti(USER::DEFAULT_ZKUSENOSTI);
@@ -48,24 +46,21 @@ class registerController extends basicPublicController
                 $user->setZnamka(USER::DEFAULT_ZNAMKA);
                 $user->setPohlavi(trim($_POST['pohlavi']));
                 $code = sha1(uniqid(rand()));
-                var_dump($code);
                 $user->setTokenCode($code);
                 $user->register();
-                //$user->save();
 
-                require_once 'models/myMail.php';
                 $mail = new MyMail();
                 $mail->sendRegisterEmail($user, $code);
 
-                $msg[] = ['type' => 'SUCCESS', 'text' => '<strong>Výborně!</strong>  Na adresu ' . $email . ' jsme zaslali aktivační link, po kterém bude tvoje registrace platná.'];
+                $this->msg[] = ['type' => 'SUCCESS', 'text' => '<strong>Výborně!</strong>  Na adresu ' . $email . ' jsme zaslali aktivační link, po kterém bude tvoje registrace platná.'];
+
+                $phtmlPath = 'registerPageSuccesfull.phtml';
             }
+
         }
 
-        include_once "views/header.phtml";
-        include_once "views/registerPage.phtml";
-        include_once "views/footer.phtml";
-
+        $this->render($phtmlPath);
     }
 }
-$class = new registerController();
-$class->start();
+$app = new registerController();
+$app->run();

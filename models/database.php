@@ -74,22 +74,20 @@ class Database
 
     public function update($table, $data, $id)
     {
-        var_dump('vytvori UPDATE sql query na zaklade table, a data, s tim ze v where bude id = $id');
-        exit();
-        /*
-        $cols = implode(', ' , array_keys($data));
-        $vals  = ':val_' . implode(', :val_' , array_keys($data));
-        $sql = 'INSERT INTO ' . $table . ' (' . $cols . ') VALUES (' . $vals . ');';
-
-        $stmt = self::$conn->prepare($sql);
-
+        $dataSet = [];
         foreach ($data as $key => $value)
         {
-            $stmt->bindValue(":val_" . $key, $value);
+            $dataSet[] = $key . " = :val_" . $key;
         }
+
+        $sql = 'UPDATE ' . $table . ' SET ' . implode(',', $dataSet) . ' WHERE id = :val_id';
+        $stmt = self::$conn->prepare($sql);
+        foreach ($data as $key => $value)
+        {
+            $stmt->bindValue(':val_' . $key, $value);
+        }
+        $stmt->bindValue(':val_id', $id);
         $stmt->execute();
-        return $stmt;
-        */
     }
 
     public function getByProperty($table, $columns, $propertyColumn, $propertyValue)

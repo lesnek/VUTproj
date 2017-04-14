@@ -1,0 +1,17 @@
+<?php include_once 'views/header.phtml';?>
+<a href="login.php">Prihlasit</a>
+<br/>
+<a href="register.php">Registrovat</a>
+<br/>
+<?php
+if(USER::isLoggedIn())
+{
+?>
+<a href="home.php">Hrat</a>
+<br/>
+<?php
+}
+?>
+A tady nejaky popis
+#E5002B
+<?php include_once 'views/footer.phtml';

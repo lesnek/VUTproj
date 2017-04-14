@@ -12,7 +12,7 @@ $basic = new basicPublicController();
 
 if(empty($_GET['id']) && empty($_GET['code']))
 {
-	$basic->redirect('index.php');
+	$basic->redirect('login.php');
 }
 
 if(isset($_GET['id']) && isset($_GET['code']))
@@ -48,7 +48,7 @@ if(isset($_GET['id']) && isset($_GET['code']))
 						<button class='close' data-dismiss='alert'>&times;</button>
 						Heslo změněno
 						</div>";
-				header("refresh:3;index.php");
+				header("refresh:3;login.php");
 			}
 		}	
 	}

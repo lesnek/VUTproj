@@ -1,0 +1,41 @@
+<div id="login">
+    <div class="container">
+        <?php include_once "message.phtml"; ?>
+    </div>
+    <div class="container">
+        <?php
+        if (isset($_GET['inactive']))
+        {
+            ?>
+            <div class='alert alert-error'>
+                <button class='close' data-dismiss='alert'>&times;</button>
+                Tento účet není aktivovaný, prosím zkontrolujte si emailovou schránku kam vám byl zasklán aktivační link.
+            </div>
+            <?php
+        }
+        ?>
+        <form class="form-signin" method="post">
+            <?php
+            if (isset($_GET['error']))
+            {
+                ?>
+                <div class='alert alert-success'>
+                    <button class='close' data-dismiss='alert'>&times;</button>
+                    <strong>Nesprávné zadání</strong>
+                </div>
+                <?php
+            }
+            ?>
+            <h2 class="form-signin-heading">Přihlášení</h2>
+            <hr/>
+            <input type="email" class="input-block-level" placeholder="Email" name="txtemail" required/>
+            <input type="password" class="input-block-level" placeholder="Heslo" name="txtupass" required/>
+            <hr/>
+            <button class="btn btn-large btn-primary" type="submit" name="login">Přihlásit</button>
+            <a href="../register.php" style="float:right;" class="btn btn-large">Registrovat</a>
+            <hr/>
+            <a href="../fpass.php">Zapomněl jsi heslo?</a>
+        </form>
+
+    </div>
+</div>

@@ -5,6 +5,9 @@
  * Date: 7.4.17
  * Time: 11:00
  */
+require_once __DIR__.'/../models/user.php';
+$user = new USER();
+$user->load($_SESSION['userSession'])
 ?>
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
@@ -13,48 +16,42 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="home.php">VUT game</a>
+            <a class="brand" href="../home.php">VUT game</a>
             <div class="nav-collapse collapse">
                 <ul class="nav pull-right">
                     <li class="dropdown">
                         <a href="#" role="button" class="dropdown-toggle"
-                           data-toggle="dropdown">lvl <?php echo $user->getLevl(); ?> <i class="icon-user"></i>
+                           data-toggle="dropdown">lvl <?php echo$user->getLevl(); ?> <i class="icon-user"></i>
                             <?php echo $user->getUserName() ?> <i class="caret"></i>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a tabindex="-1" href="logout.php">Odhlásit</a>
+                                <a tabindex="-1" href="../logout.php">Odhlásit</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav">
                     <li>
-                        <a href="postava.php">Postava</a>
+                        <a href="../postava.php">Postava</a>
                     </li>
                     <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Tutorials <b class="caret"></b>
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Výzvy<b class="caret"></b>
 
                         </a>
                         <ul class="dropdown-menu" id="menu1">
-                            <li><a href="http://www.codingcage.com/search/label/PHP OOP">PHP OOP</a></li>
-                            <li><a href="http://www.codingcage.com/search/label/PDO">PHP PDO</a></li>
-                            <li><a href="http://www.codingcage.com/search/label/jQuery">jQuery</a></li>
-                            <li><a href="http://www.codingcage.com/search/label/Bootstrap">Bootstrap</a></li>
-                            <li><a href="http://www.codingcage.com/search/label/CRUD">CRUD</a></li>
+                            <li><a href="#">Přednáška</a></li>
+                            <li><a href="#">Cvičení</a></li>
+                            <li><a href="#">Zápočet</a></li>
+                            <li><a href="#">Zkouška</a></li>
+                            <li><a href="#">Diplomka</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="http://www.codingcage.com/2015/09/login-registration-email-verification-forgot-password-php.html">Tutorial
-                            Link</a>
+                        <a href="#">Učení</a>
                     </li>
-
-
                 </ul>
             </div>
         </div>
     </div>
 </div>
-<script src="bootstrap/js/jquery-1.9.1.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/scripts.js"></script>

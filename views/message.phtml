@@ -1,8 +1,8 @@
 <?php
 
-if(isset($msg) && count($msg) > 0)
+if(isset($this->msg) && count($this->msg) > 0)
 {
-    foreach($msg as $msgData)
+    foreach($this->msg as $msgData)
     {
         $msgType = $msgData['type'];
         $msgText = $msgData['text'];

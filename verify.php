@@ -3,58 +3,49 @@
  * Created by PhpStorm.
  * User: lesnek
  * Date: 6.4.17
- * Time: 1:15
+ * Time: 00:25
  */
 require_once 'models/user.php';
 require_once 'basicPublicController.php';
 
-$user = new USER();
-$basic = new basicPublicController();
-$msg = [];
+class verifyController extends basicPublicController
+{
+    public function run()
+    {
+        $id   = isset($_GET['id'])   ? $_GET['id']   : null;
+        $code = isset($_GET['code']) ? $_GET['code'] : null;
 
-if (empty($_GET['id']) && empty($_GET['code'])) {
-    $basic->redirect('index.php');
-}
-
-if (isset($_GET['id']) && isset($_GET['code'])) {
-    $id = base64_decode($_GET['id']);
-    $code = $_GET['code'];
-
-    $IS_ACTIVATE = 'Y';
-    $IS_NOT_ACTIVATE = 'N';
-
-    if ($user->getId() == $id && $user->getTokenCode() == $code) {
-        if ($user->getUserStatus() == $IS_NOT_ACTIVATE) {
-            $user->setUserStatus($IS_ACTIVATE);
-
-            $msg = ['type' => 'SUCCESS', 'text' => "<strong>Gratulujeme!</strong>  Účet máš nyní aktivovaný, <a href='index.php'>Zde se přihlaš</a></div>"];
-        } else {
-            $msg = ['type' => 'ERROR', 'text' => "<strong>STOP!</strong> Tvůj účet je již aktivovaný, <a href='index.php'>raději se rovnou přihlaš</a></div>"];
+        if (empty($id) || empty($code))
+        {
+            $this->redirect('index.php');
         }
-    } else {
-        $msg = ['type' => 'SUCCESS', 'text' => "<strong>Hups! </strong>Tak tvůj učet tu asi není. <a href='register.php'>Registruj se zde</a></div>"];
+        else
+        {
+            $id = base64_decode($id);
+            $user = new USER($id);
+
+            if ($user->getId() == $id && $user->getTokenCode() == $code)
+            {
+                if ($user->getUserStatus() == USER::IS_NOT_ACTIVATE)
+                {
+                    $user->setUserStatus(USER::IS_ACTIVATE);
+                    $user->save();
+
+                    $this->msg[] = ['type' => 'SUCCESS', 'text' => "<strong>Gratulujeme!</strong>  Účet máš nyní aktivovaný, <a href='login.php'>Zde se přihlaš</a></div>"];
+                }
+                else
+                {
+                    $this->msg[] = ['type' => 'ERROR', 'text' => "<strong>STOP!</strong> Tvůj účet je již aktivovaný, <a href='login.php'>raději se rovnou přihlaš</a></div>"];
+                }
+            }
+            else
+            {
+                $this->msg[] = ['type' => 'ERROR', 'text' => "<strong>Hups! </strong>Tak tvůj učet tu asi není. <a href='register.php'>Registruj se zde</a></div>"];
+            }
+        }
+
+        $this->render('verify.phtml');
     }
 }
-
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Potvrzení registrace</title>
-
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-    <link href="assets/layout.css" rel="stylesheet" media="screen">
-
-    <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-</head>
-<body id="login">
-<div class="container">
-    <?php if (isset($msg)) {
-        echo $msg;
-    } ?>
-</div>
-<script src="vendors/jquery-1.9.1.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-</body>
-</html>
+$app = new verifyController();
+$app->run();

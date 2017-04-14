@@ -73,16 +73,21 @@ class USER
     private $znamka       = null;
     private $pohlavi      = null;
 
-    public function __construct()
+    public function __construct($id = null)
     {
         $this->database = new Database();
+
+        if($id !== null)
+        {
+            $this->load($id);
+        }
     }
 
     /* setry */
     public function setId($value)           { $this->id = $value; }
     public function setUserName($value)     { $this->userName = $value; }
     public function setUserEmail($value)    { $this->userEmail = $value; }
-    public function setUserPassword($value) { $this->userPassword = sha1($value); }
+    public function setUserPassword($value) { $this->userPassword = $value; }
     public function setTokenCode($value)    { $this->tokenCode = $value; }
     public function setUserStatus($value)   { $this->userStatus = $value; }
     public function setLevl($value)         { $this->levl = $value; }
@@ -210,38 +215,31 @@ class USER
 		{
 		    $data = $this->database->getByProperty(USER::TABLE, $this->columns, USER::COLUMN_USER_EMAIL, $email);
 
-		    if(count($data) > 0)
-            {
-				if($data[USER::COLUMN_USER_STATUS] == USER::IS_ACTIVATE)
-				{
-					//if($data[USER::COLUMN_USER_PASS] == $this->getUserPassword())
-                    if($data[USER::COLUMN_USER_PASS] == sha1($upass))
-					{
-						$_SESSION['userSession'] = $data['id'];
-						return true;
-					}
-					else
-					{
-                        var_dump($data[USER::COLUMN_USER_PASS]);
-                        echo '<br/>';
-                        var_dump($this->getUserPassword());
-                        exit;
-						header("Location: index.php?error");
-						exit;
-					}
-				}
-				else
-				{
-					header("Location: index.php?inactive");
-					exit;
-				}
-			}
-			else
-			{
+            $_SESSION['userSession'] = null;
 
-				header("Location: index.php?error");
-				exit;
-			}
+		    if(count($data) > 0 && $data[USER::COLUMN_USER_PASS] == sha1($upass))
+            {
+                $this->setId($data[USER::COLUMN_ID]);
+                $this->setUserName($data[USER::COLUMN_USER_NAME]);
+                $this->setUserEmail($data[USER::COLUMN_USER_EMAIL]);
+                $this->setUserPassword($data[USER::COLUMN_USER_PASS]);
+                $this->setTokenCode($data[USER::COLUMN_TOKEN_CODE]);
+                $this->setUserStatus($data[USER::COLUMN_USER_STATUS]);
+                $this->setLevl($data[USER::COLUMN_LEVL]);
+                $this->setZkusenosti($data[USER::COLUMN_ZKUSENOSTI]);
+                $this->setEnergie($data[USER::COLUMN_ENERGIE]);
+                $this->setStesti($data[USER::COLUMN_STESTI]);
+                $this->setInteligence($data[USER::COLUMN_INTELIGENCE]);
+                $this->setSoustredeni($data[USER::COLUMN_SOUSTREDENI]);
+                $this->setZnamka($data[USER::COLUMN_ZNAMKA]);
+                $this->setPohlavi($data[USER::COLUMN_POHLAVI]);
+
+                if($data[USER::COLUMN_USER_STATUS] == USER::IS_ACTIVATE)
+                {
+                    $_SESSION['userSession'] = $data[USER::COLUMN_ID];
+                }
+            }
+
 		}
 		catch(PDOException $ex)
 		{
@@ -253,17 +251,16 @@ class USER
 	public static function isLoggedIn()
 	{
 	    $result = false;
-		if(isset($_SESSION['userSession']))
+		if(isset($_SESSION['userSession']) && $_SESSION['userSession'] !== null)
 		{
             $result = true;
 		}
 		return $result;
 	}
 
-	public function logout()
+	public static function logout()
 	{
-		session_destroy();
-		$_SESSION['userSession'] = false;
+		$_SESSION['userSession'] = null;
 	}
 
     public static function existEmail($email)

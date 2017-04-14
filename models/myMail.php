@@ -6,8 +6,11 @@
  * Date: 7.4.17
  * Time: 16:12
  */
-class MyMail
+class MyMail extends basicPublicController
 {
+    const SMTP = 'smtp.seznam.cz';
+
+
     public function sendForgotPassword(USER $user, $code)
     {
         $key = base64_encode($user->getId());
@@ -23,7 +26,7 @@ class MyMail
 				   <a href='http://www.suprweb.php5.cz/resetpass.php?id=$key&code=$code'>Resetovat heslo</a>";
         $subject = "Reset hesla";
 
-        $this->send_mail($email,$message,$subject);
+        $this->sendMail($email,$message,$subject);
     }
 
     public function sendRegisterEmail(USER $user, $code)
@@ -42,10 +45,10 @@ class MyMail
 
         $subject = "Potvrďte registraci";
 
-        $this->send_mail($email, $message, $subject);
+        $this->sendMail($email, $message, $subject);
     }
 
-    private function send_mail($email, $message, $subject)
+    private function sendMail($email, $message, $subject)
     {
         require_once(__DIR__ . '/../mailer/class.phpmailer.php');
         $mail = new PHPMailer();
@@ -53,7 +56,7 @@ class MyMail
         $mail->SMTPDebug = 0;
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = "ssl";
-        $mail->Host = "smtp.seznam.cz";
+        $mail->Host = myMail::SMTP;
         $mail->Port = 465;
         $mail->AddAddress($email);
         $mail->Username = "vutgame@email.cz";

@@ -6,13 +6,20 @@
  * Time: 00:25
  */
 
+require_once 'basicPublicController.php';
 class basicPrivateController extends basicPublicController
 {
-    public function start()
+
+    public function __construct()
     {
         if (USER::isLoggedIn() !== true) {
-            $this->redirect('index.php');
+            $this->redirect('login.php');
         }
+    }
+
+    public function run()
+    {
+
     }
 }
 
