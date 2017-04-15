@@ -2,7 +2,29 @@
 body {
 	padding-top: 60px;
 	padding-bottom: 40px;
-    background: rgb(229, 0, 43) image('/../Obrazky/VUTlogoBig.jpg');
+    background: #e5002b;
+}
+
+.logoVUT {
+    text-align: center;
+}
+.vuttlac {
+    text-align: center;
+    border-radius: 5px;
+    background-color: white;
+    padding: 10px 5px;
+    margin-bottom: 10px;
+    display: block;
+}
+.vuttlac a {
+    text-decoration: none;
+    color: rgb(230, 0, 42);
+    font-style: italic;
+    font-size: 30px;
+    display: block;
+}
+.vuttlac:hover {
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 /** Login Page **/
