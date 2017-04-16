@@ -9,7 +9,7 @@ class Database
 {
     private $host     = "localhost";
     private $db_name  = "czsuprweb";
-    private $username = "root";
+    private $username = "czsuprweb";
     private $password = "Lesnek95";
 
     /**
