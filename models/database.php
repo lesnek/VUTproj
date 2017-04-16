@@ -10,7 +10,7 @@ class Database
     private $host     = "localhost";
     private $db_name  = "czsuprweb";
     private $username = "root";
-    private $password = "";
+    private $password = "Lesnek95";
 
     /**
     private $host     = "localhost";
