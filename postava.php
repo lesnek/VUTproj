@@ -11,6 +11,9 @@ require_once 'basicPrivateController.php';
 class characterController extends basicPrivateController {
     public function run()
     {
+        $user = new USER();
+        $user->load(base64_decode($_SESSION['userSession']));
+        $experience = $user->getZkusenosti();
         $this->renderPrivate('postava.phtml');
     }
 }

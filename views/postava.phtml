@@ -1,7 +1,64 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Milan
- * Date: 15.04.2017
- * Time: 0:29
- */
+<div class="postava">
+    <div class="container">
+        <div class="sedma">
+            <div class="logoVUT">
+                <br>
+                <h3><?php echo $user->getUserName(); ?> - Level <?php echo $user->getLevl(); ?></h3><br>
+                <div class="progress progress-striped">
+                    <div class="bar bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"></div>
+                </div>
+                <img src="Obrazky/kluk.png">
+            </div>
+            <table class="stats">
+                <tr>
+                    <td>
+                        <?php echo $user->getEnergie(); ?>
+                    </td>
+                    <td>
+                        <img src="Obrazky/blesk.png"> Energie
+                    </td>
+                    <td class="neaktiv">
+                        <img src="Obrazky/plus.png">
+                        <span class="aktiv">Enegie na testy, přednášky, cvičení a zkoušky.</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php echo $user->getStesti(); ?>
+                    </td>
+                    <td>
+                        <img src="Obrazky/ctyrlistek.png"> Štěstí
+                    </td>
+                    <td class="neaktiv">
+                        <img src="Obrazky/plus.png">
+                        <span class="aktiv">Zvyšuje náhodnou šanci na úspěch.</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php echo $user->getInteligence(); ?>
+                    </td>
+                    <td>
+                        <img src="Obrazky/mozek.png">Inteligence
+                    </td>
+                    <td class="neaktiv">
+                        <img src="Obrazky/plus.png">
+                        <span class="aktiv">Zvyšuje šanci na úspěch.</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php echo $user->getSoustredeni(); ?>
+                    </td>
+                    <td>
+                        <img src="Obrazky/zarovka.png">Soustředění
+                    </td>
+                    <td class="neaktiv">
+                        <img src="Obrazky/plus.png">
+                        <span class="aktiv">Zvýší hodnotu inteligence při učení.</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

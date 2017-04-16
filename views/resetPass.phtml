@@ -1,0 +1,24 @@
+<div id="login">
+<div class="container">
+    <div class='alert alert-success'>
+        <strong>Ahoj!</strong>, na této stránce si můžeš resetovat heslo
+    </div>
+    <form class="form-signin" method="post">
+        <h3 class="form-signin-heading">Reset hesla</h3>
+        <hr>
+        <?php
+        include_once 'views/message.phtml';
+        ?>
+        <input type="password" class="input-block-level" placeholder="Nové heslo" name="pass" required>
+        <input type="password" class="input-block-level" placeholder="Potvrďte nové heslo" name="confirm-pass" required>
+        <hr>
+        <button class="btn btn-large btn-primary" type="submit" name="btn-reset-pass">Resetovat heslo</button>
+        <?php
+        if ($msgType == 'SUCCESS'){
+            echo '<a href="login.php" class="btn btn-large btn-primary" style="float: right;" ">Přihlásit</a>';
+        }
+        ?>
+
+    </form>
+
+</div>

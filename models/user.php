@@ -179,6 +179,34 @@ class USER
 
         return $result;
     }
+    public function loadByMail($email)
+    {
+        try
+        {
+            $data = $this->database->getByProperty(USER::TABLE, $this->columns, USER::COLUMN_USER_EMAIL, $email);
+
+            if(count($data) > 0)
+            {
+                $this->setId($data[USER::COLUMN_ID]);
+                $this->setUserName($data[USER::COLUMN_USER_NAME]);
+                $this->setUserEmail($data[USER::COLUMN_USER_EMAIL]);
+                $this->setUserPassword($data[USER::COLUMN_USER_PASS]);
+                $this->setTokenCode($data[USER::COLUMN_TOKEN_CODE]);
+                $this->setUserStatus($data[USER::COLUMN_USER_STATUS]);
+                $this->setLevl($data[USER::COLUMN_LEVL]);
+                $this->setZkusenosti($data[USER::COLUMN_ZKUSENOSTI]);
+                $this->setEnergie($data[USER::COLUMN_ENERGIE]);
+                $this->setStesti($data[USER::COLUMN_STESTI]);
+                $this->setInteligence($data[USER::COLUMN_INTELIGENCE]);
+                $this->setSoustredeni($data[USER::COLUMN_SOUSTREDENI]);
+                $this->setZnamka($data[USER::COLUMN_ZNAMKA]);
+                $this->setPohlavi($data[USER::COLUMN_POHLAVI]);
+            }
+        }
+        catch (PDOException $ex){
+            echo $ex->getMessage();
+        }
+    }
     public function load($id)
     {
         try
@@ -236,7 +264,7 @@ class USER
 
                 if($data[USER::COLUMN_USER_STATUS] == USER::IS_ACTIVATE)
                 {
-                    $_SESSION['userSession'] = $data[USER::COLUMN_ID];
+                    $_SESSION['userSession'] = base64_encode($data[USER::COLUMN_ID]);
                 }
             }
 

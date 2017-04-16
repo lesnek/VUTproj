@@ -9,12 +9,12 @@ body {
     text-align: center;
 }
 .vuttlac {
+    display: block;
     text-align: center;
     border-radius: 5px;
     background-color: white;
     padding: 10px 5px;
     margin-bottom: 10px;
-    display: block;
 }
 .vuttlac a {
     text-decoration: none;
@@ -216,4 +216,45 @@ body {
 }
 .the-icons i:hover {
   background-color: rgba(255,0,0,.25);
+}
+.neaktiv {
+    border-radius: 15px;
+    color: maroon;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    font-size: 30px;
+}
+.neaktiv .aktiv {
+    font-family: Arial, serif;
+    position: absolute;
+    visibility: hidden;
+    font-size: 12px;
+    background-color:  rgb(255, 255, 255);
+    color: maroon;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid maroon;
+    margin-top: 10px;
+    margin-left: 30px;
+    padding: 5px 10px;
+    width: 110px;
+}
+
+.neaktiv:hover .aktiv {
+    visibility: visible;
+}
+.sedma{
+    margin: 0 auto;
+    border-radius: 15px;
+    border: 2px solid maroon;
+    background-color: rgb(255, 255, 255);
+    width: 40%;
+}
+.stats {
+    width: 100%;
+    text-align: center;
+    table-layout: fixed;
+}
+.postava {
+    margin: 0 auto;
 }

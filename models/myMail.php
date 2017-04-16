@@ -8,14 +8,19 @@
  */
 class MyMail extends basicPublicController
 {
-    const SMTP = 'smtp.seznam.cz';
+    const SMTP             = 'smtp.seznam.cz';
+    const SMTPDbg          = 0;
+    const SMTPAuthentic    = true;
+    const Port             = 465;
+    const UserN            = 'vutgame@seznam.cz';
+    const Pass             = 'studentvpn';
+    const From             = ['vutgame@email.cz', 'VUTgame (no-reply)'];
+    const ReplyTo          = ["vutgame@email.cz", "VUTgame"];
 
 
-    public function sendForgotPassword(USER $user, $code)
+    public function sendForgotPassword(USER $user, $code, $email)
     {
         $key = base64_encode($user->getId());
-        $email = $user->getUserEmail();
-
 
         $message= "Dobrý den, $email
 				   <br /><br />
@@ -23,7 +28,7 @@ class MyMail extends basicPublicController
 				   <br /><br />
 				   Klikněte prosím níže pro resetování hesla:
 				   <br /><br />
-				   <a href='http://www.suprweb.php5.cz/resetpass.php?id=$key&code=$code'>Resetovat heslo</a>";
+				   <a href='http://www.suprweb.php5.cz/resetPass.php?id=$key&code=$code'>Resetovat heslo</a>";
         $subject = "Reset hesla";
 
         $this->sendMail($email,$message,$subject);
@@ -43,7 +48,7 @@ class MyMail extends basicPublicController
                     <br /><br />
                     Děkujeme za registraci";
 
-        $subject = "Potvrďte registraci";
+        $subject = "Potvrzení registrace";
 
         $this->sendMail($email, $message, $subject);
     }
@@ -53,16 +58,16 @@ class MyMail extends basicPublicController
         require_once(__DIR__ . '/../mailer/class.phpmailer.php');
         $mail = new PHPMailer();
         $mail->IsSMTP();
-        $mail->SMTPDebug = 0;
-        $mail->SMTPAuth = true;
+        $mail->SMTPDebug = myMail::SMTPDbg;
+        $mail->SMTPAuth = myMail::SMTPAuthentic;
         $mail->SMTPSecure = "ssl";
         $mail->Host = myMail::SMTP;
-        $mail->Port = 465;
+        $mail->Port = myMail::Port;
         $mail->AddAddress($email);
-        $mail->Username = "vutgame@email.cz";
-        $mail->Password = "studentvpn";
-        $mail->SetFrom('vutgame@email.cz', 'VUTgame');
-        $mail->AddReplyTo("vutgame@email.cz", "VUTgame");
+        $mail->Username = myMail::UserN;
+        $mail->Password = myMail::Pass;
+        $mail->SetFrom(myMail::From);
+        $mail->AddReplyTo(myMail::ReplyTo);
         $mail->Subject = $subject;
         $mail->MsgHTML($message);
         $mail->Send();

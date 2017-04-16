@@ -4,7 +4,7 @@
         <div class="row">
             <div class="span4"></div>
             <div class="span2 vuttlac">
-                <a href="login.php">Prihlasit</a>
+                <a href="login.php">Přihlásit</a>
             </div>
             <div class="span2 vuttlac">
                 <a href="register.php">Registrovat</a>
@@ -19,19 +19,24 @@
             <?php
             if (USER::isLoggedIn()) {
                 echo '
-            <div class="vuttlac"><a href="home.php">Hrat</a></div>
+            <div class="vuttlac"><a href="home.php">Hrát</a></div>
             <br/>';
             }
             ?>
             <div class="hero-unit">
                 <h1>Vítejte,</h1><br>
                 <p>
-                ve světě technické dřiny, zkouškových pekel a zvláštní matematiky, která už skoro nemá čísla.
-                Tato internetová hra je určena k tomu aby vám přibližně ukázala o jaké krásy přicházíte nebo k
-                nostalgickým vzpomínkám pokud jste odstudovaný šťastlivec.
-                Jde o neziskovou hru, pod licencí GNU. Když, už si chcete zahrát, tak hrajte, ale nerozbíjte to!
-                Pokud vás zajímá zdrojový kód, tak je celý na mém <a href="https://github.com/lesnek/VUTproj">GitHubu</a>.
-                Web je psaný ve starém Bootstrapu(v2.3.2), takže není zcela responzivní... (jsem velmi líný na styly)
+                    ve světě technické dřiny, zkouškových pekel a zvláštní matematiky, která už skoro nemá čísla.
+                    Tato internetová hra je určena k tomu aby vám přibližně ukázala o jaké krásy přicházíte nebo k
+                    nostalgickým vzpomínkám pokud jste odstudovaný šťastlivec.
+                </p>
+                <p>Bohužel jsme studovali pouze strojárnu a bůh ví jak moc to rozšíříme nebo nedoděláme, přeci jenom
+                    jsme taky studenti.
+                </p>
+                <p>Jde o neziskovou hru, pod licencí GNU. Když, už si chcete zahrát, tak hrajte, ale nerozbíjte to!
+                    Pokud vás zajímá zdrojový kód, tak je celý na mém <a href="https://github.com/lesnek/VUTproj">GitHubu</a>.
+                    Web je psaný ve starém Bootstrapu(v2.3.2 ♥), takže není zcela responzivní... (jsem velmi líný na
+                    styly)
                 </p>
             </div>
             <?php include_once 'footer.phtml'; ?>

@@ -1,0 +1,17 @@
+<div id="login">
+    <div class="container">
+
+        <form class="form-signin" method="post">
+            <h2 class="form-signin-heading">Zapomenuté heslo</h2>
+            <hr/>
+            <?php include_once "views/message.phtml"; ?>
+                <div class='alert alert-info'>
+                    Prosím zadejte email na který máte založený účet. Bude vám na něj zaslán resetovací link.
+                </div>
+            <input type="email" class="input-block-level" placeholder="Email @" name="txtemail" required/>
+            <hr/>
+            <button class="btn btn-danger btn-primary" type="submit" name="submit">Vygenerovat nové heslo</button>
+        </form>
+
+    </div>
+</div>
