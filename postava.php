@@ -7,19 +7,24 @@
  */
 require_once 'models/user.php';
 require_once 'basicPrivateController.php';
+require_once 'models/levels.php';
 
 class characterController extends basicPrivateController {
     public function run()
     {
         $user = new USER();
+        $levelC = new levels();
         $user->load(base64_decode($_SESSION['userSession']));
-        $experience = $user->getZkusenosti();
         $this->renderPrivate('postava.phtml');
     }
 }
 
+
 $class = new characterController();
 $class->run();
+
+
+
 
 
 

@@ -9,14 +9,9 @@
 class MyMail extends basicPublicController
 {
     const SMTP             = 'smtp.seznam.cz';
-    const SMTPDbg          = 0;
-    const SMTPAuthentic    = true;
     const Port             = 465;
-    const UserN            = 'vutgame@seznam.cz';
+    const UserN            = 'vutgame@email.cz';
     const Pass             = 'studentvpn';
-    const From             = ['vutgame@email.cz', 'VUTgame (no-reply)'];
-    const ReplyTo          = ["vutgame@email.cz", "VUTgame"];
-
 
     public function sendForgotPassword(USER $user, $code, $email)
     {
@@ -58,16 +53,16 @@ class MyMail extends basicPublicController
         require_once(__DIR__ . '/../mailer/class.phpmailer.php');
         $mail = new PHPMailer();
         $mail->IsSMTP();
-        $mail->SMTPDebug = myMail::SMTPDbg;
-        $mail->SMTPAuth = myMail::SMTPAuthentic;
+        $mail->SMTPDebug = 0;
+        $mail->SMTPAuth = true;
         $mail->SMTPSecure = "ssl";
         $mail->Host = myMail::SMTP;
         $mail->Port = myMail::Port;
         $mail->AddAddress($email);
         $mail->Username = myMail::UserN;
         $mail->Password = myMail::Pass;
-        $mail->SetFrom(myMail::From);
-        $mail->AddReplyTo(myMail::ReplyTo);
+        $mail->SetFrom('vutgame@email.cz', 'VUTgame (no-reply)');
+        $mail->AddReplyTo("vutgame@email.cz", "VUTgame");
         $mail->Subject = $subject;
         $mail->MsgHTML($message);
         $mail->Send();

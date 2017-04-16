@@ -207,6 +207,7 @@ class USER
             echo $ex->getMessage();
         }
     }
+
     public function load($id)
     {
         try

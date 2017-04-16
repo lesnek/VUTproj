@@ -1,13 +1,27 @@
+<?php
+    $level = $user->getLevl();
+    $zkusenosti = $user->getZkusenosti();
+    $levelC = new levels();
+    $progress = $levelC->levelProgress($level,$zkusenosti);
+?>
 <div class="postava">
     <div class="container">
         <div class="sedma">
             <div class="logoVUT">
                 <br>
-                <h3><?php echo $user->getUserName(); ?> - Level <?php echo $user->getLevl(); ?></h3><br>
+                <h3><?php echo $user->getUserName(); ?> - Level <?php echo $level; ?></h3><br>
                 <div class="progress progress-striped">
-                    <div class="bar bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"></div>
+                    <div class="bar bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $progress; ?>%"></div>
                 </div>
-                <img src="Obrazky/kluk.png">
+                <?php
+                if ($user->getPohlavi() == 'M')
+                {
+                    echo '<img src="Obrazky/kluk.png">';
+                } else
+                    {
+                    echo '<img src="Obrazky/holka.png">';
+                    }
+                    ?>
             </div>
             <table class="stats">
                 <tr>

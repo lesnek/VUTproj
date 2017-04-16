@@ -12,12 +12,6 @@ class Database
     private $username = "czsuprweb";
     private $password = "Lesnek95";
 
-    /**
-    private $host     = "localhost";
-    private $db_name  = "czsuprweb";
-    private $username = "czsuprweb";
-    private $password = "Lesnek95";
-    **/
 
     /** @var PDO $conn **/
     static private $conn = null;
@@ -27,6 +21,7 @@ class Database
         $this->dbConnect();
     }
 
+    /** Connect to database - trought PDO **/
     public function dbConnect()
 	{
         try
@@ -42,6 +37,7 @@ class Database
         }
     }
 
+    /** To get last id from database to create new user - preventing collision **/
     public function getLastId()
     {
         $sql = 'SELECT LAST_INSERT_ID()';
@@ -56,6 +52,17 @@ class Database
         return $result;
     }
 
+    /** Registered users counter **/
+    public function registredMemberCount ()
+    {
+        $del = self::$conn->prepare('SELECT * FROM tbl_users');
+        $del->execute();
+
+        $count = $del->rowCount();
+        return $count;
+    }
+
+    /** Func to insert data to database **/
     public function insert($table, $data)
     {
         $cols = implode(', ' , array_keys($data));
@@ -72,6 +79,7 @@ class Database
         return $stmt;
     }
 
+    /** Update data in databse (set newer data) **/
     public function update($table, $data, $id)
     {
         $dataSet = [];
@@ -90,6 +98,7 @@ class Database
         $stmt->execute();
     }
 
+    /** Getting data from database by any property **/
     public function getByProperty($table, $columns, $propertyColumn, $propertyValue)
     {
         $result = null;

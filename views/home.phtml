@@ -1,2 +1,5 @@
 <?php
 include_once 'navMenu.phtml';
+require_once 'models/database.php';
+$conn = new Database();
+echo $conn->registredMemberCount();
