@@ -13,12 +13,10 @@ class characterController extends basicPrivateController {
     public function run()
     {
         $user = new USER();
-        $levelC = new levels();
         $user->load(base64_decode($_SESSION['userSession']));
         $this->renderPrivate('postava.phtml');
     }
 }
-
 
 $class = new characterController();
 $class->run();

@@ -1,8 +1,10 @@
 <?php
-    $level = $user->getLevl();
+    $level      = $user->getLevl();
     $zkusenosti = $user->getZkusenosti();
-    $levelC = new levels();
-    $progress = $levelC->levelProgress($level,$zkusenosti);
+    $levelC     = new levels();
+    $progress   = $levelC->levelProgress($user,$level,$zkusenosti);
+    $endExp     = $levelC->getEndExp($level);
+    $startExp   = $levelC->getStartExp($level);
 ?>
 <div class="postava">
     <div class="container">
@@ -10,8 +12,10 @@
             <div class="logoVUT">
                 <br>
                 <h3><?php echo $user->getUserName(); ?> - Level <?php echo $level; ?></h3><br>
-                <div class="progress progress-striped">
-                    <div class="bar bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $progress; ?>%"></div>
+                Zkušenosti:
+                <div class="progress">
+                    <div class="bar bar-danger" role="progressbar" aria-valuenow="<?php echo $progress; ?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $progress; ?>%">
+                        <?php echo ($zkusenosti-$startExp).'/'.($endExp-$startExp); ?></div>
                 </div>
                 <?php
                 if ($user->getPohlavi() == 'M')
