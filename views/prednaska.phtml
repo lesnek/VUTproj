@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="aktual">
+        <div class="hero-unit">
+            <h1>Přednáška</h1>
+            <div class="logoVUT"><img src="../Obrazky/ucitel.png"></div>
+            <hr style="border-color: #0e0e0e">
+            <p>Přednášky všichni známe, samozřejmě vaše postava, když jde na ni, tak jde na celé dvě hodiny! Níže si
+                však musíte vybrat
+                jak dlouho vaše postava dokáže ze dvou hodin dávat pozor a víme jak náročné to je na celé dvě
+                hodiny!</p>
+            <div class="row span6">
+                <form method="post" action="prednaska.php">
+                    <select name="prednaska" title="prednaska" style="margin-top: 10px">
+                        <option value="" disabled selected>Vyberte jak dlouho vydržíte:</option>
+                        <option value="10">10 minut - 5 Energie</option>
+                        <option value="30">30 minut - 13 Energie</option>
+                        <option value="60">1 hodina - 20 Energie</option>
+                        <option value="120">2 hodiny - 30 Energie</option>
+                    </select>
+                    <button class="btn btn-small btn-success" type="submit" name="zacit">Začít</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

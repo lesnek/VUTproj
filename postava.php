@@ -9,7 +9,8 @@ require_once 'models/user.php';
 require_once 'basicPrivateController.php';
 require_once 'models/levels.php';
 
-class characterController extends basicPrivateController {
+class characterController extends basicPrivateController
+{
     public function run()
     {
         $user = new USER();

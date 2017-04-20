@@ -10,18 +10,32 @@ require_once 'database.php';
 class levels
 {
     const TABLE      = 'tbl_users';
-    const levl1      = 50;
-    const levl2      = 100;
-    const levl3      = 225;
-    const levl4      = 375;
-    const levl5      = 550;
-    const levl6      = 725;
-    const levl7      = 950;
-    const levl8      = 1200;
-    const levl9      = 1500;
-    const levl10     = 1850;
-    const levl11     = 2225;
-    const levl12     = 2625;
+    const levl1      = 25;
+    const levl2      = 50;
+    const levl3      = 125;
+    const levl4      = 225;
+    const levl5      = 350;
+    const levl6      = 500;
+    const levl7      = 675;
+    const levl8      = 875;
+    const levl9      = 1100;
+    const levl10     = 1350;
+    const levl11     = 1625;
+    const levl12     = 1925;
+    const levl13     = 2250;
+    const levl14     = 2625;
+    const levl15     = 3025;
+    const levl16     = 3450;
+    const levl17     = 3875;
+    const levl18     = 4350;
+    const levl19     = 4850;
+    const levl20     = 5375;
+    const levl21     = 5925;
+    const levl22     = 6500;
+    const levl23     = 7100;
+    const levl24     = 7725;
+    const levl25     = 8375;
+    const levl26     = 9050;
 
 
     private $levelData = [1 => levels::levl1,
@@ -35,14 +49,28 @@ class levels
                           9 => levels::levl9,
                          10 => levels::levl10,
                          11 => levels::levl11,
-                         12 => levels::levl12
-    ];
+                         12 => levels::levl12,
+                         13 => levels::levl13,
+                         14 => levels::levl14,
+                         15 => levels::levl15,
+                         16 => levels::levl16,
+                         17 => levels::levl17,
+                         18 => levels::levl18,
+                         19 => levels::levl19,
+                         20 => levels::levl20,
+                         21 => levels::levl21,
+                         22 => levels::levl22,
+                         23 => levels::levl23,
+                         24 => levels::levl24,
+                         25 => levels::levl25,
+                         26 => levels::levl26
+                         ];
 
     public function getStartExp($level)
     {
         $startExp = 0;
-        $this->levelData;
-        foreach ($this->levelData as $key => $value){
+        foreach ($this->levelData as $key => $value)
+        {
             if ($key == $level){
                 $startExp = $value;
             }
@@ -53,9 +81,9 @@ class levels
     public function getEndExp($level)
     {
         $endExp = 0;
-        $this->levelData;
-        foreach ($this->levelData as $key => $value){
-            if ($key-1 == $level){
+        foreach ($this->levelData as $key => $value)
+        {
+            if ($key == $level+1){
                 $endExp = $value;
             }
         }
@@ -64,10 +92,11 @@ class levels
 
     public function levelProgress(USER $user, $level, $zkusenosti)
     {
-        $highExp = 0;
-        $this->levelData;
+        $end = $this->getEndExp($level)-$this->getStartExp($level);
+        $start = $zkusenosti-$this->getStartExp($level);
+        $progress = (($start)/($end))*100;
         foreach ($this->levelData as $key => $value){
-            if ($key-1 == $level) {
+            if ($key == $level) {
                 $highExp = $value;
                 if ($highExp <= $zkusenosti) {
                     $user->setLevl($level++);
@@ -75,8 +104,6 @@ class levels
                 }
             }
         }
-        $this->getEndExp($level);
-        $progres = (($zkusenosti-$this->getStartExp($level))/($highExp-$this->getStartExp($level)))*100;
-        return $progres;
+        return $progress;
     }
 }

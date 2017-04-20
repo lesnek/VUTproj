@@ -14,6 +14,7 @@ class basicPrivateController extends basicPublicController
     {
         if (USER::isLoggedIn() !== true) {
             $this->redirect('login.php');
+            exit;
         }
     }
 

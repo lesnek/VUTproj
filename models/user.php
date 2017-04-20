@@ -284,6 +284,7 @@ class USER
 		{
             $result = true;
 		}
+
 		return $result;
 	}
 

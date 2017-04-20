@@ -1,5 +1,17 @@
 <?php
-include_once 'navMenu.phtml';
+include_once 'views/navMenu.phtml';
 require_once 'models/database.php';
 $conn = new Database();
-echo $conn->registredMemberCount();
+?>
+<div class="container">
+    <div class="aktual">
+        <div class="hero-unit">
+            <h1>Aktuality</h1><br>
+            <p>Verze <strong>1.0.1.</strong> - Totální základ, všechno funguje jen velmi jemně. Všechny bugy si nechte
+                pro sebe.</p>
+            <br>
+            <hr style="border-color: #0e0e0e">
+            <p style="float: right;">Registrováno je již <?php echo $conn->tableRowsCount('tbl_users'); ?> uživatelů</p>
+        </div>
+    </div>
+</div>
