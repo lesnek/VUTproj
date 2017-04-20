@@ -7,11 +7,12 @@
  */
 class Database
 {
-    private $host     = "localhost";
-    private $db_name  = "czsuprweb";
-    private $username = "czsuprweb";
-    private $password = "Lesnek95";
+    private $host;
+    private $db_name;
+    private $username;
+    private $password;
 
+    const CONFIG_FILE = __DIR__ . "/../config.json";
 
     /** @var PDO $conn **/
     static private $conn = null;
@@ -27,6 +28,14 @@ class Database
         try
 		{
 		    if (!self::$conn instanceof PDO) {
+		        $content = file_get_contents(self::CONFIG_FILE);
+		        $json = json_decode($content);
+
+                $this->host = $json["db_server"];
+                $this->db_name = $json["db_name"];
+                $this->username = $json["db_user"];
+                $this->password = $json["db_pass"];
+
                 self::$conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
                 self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
@@ -52,10 +61,13 @@ class Database
         return $result;
     }
 
-    /** Registered users counter **/
-    public function registredMemberCount ()
+    /** Registered users counter *
+     * @param String $table
+     * @return int
+     */
+    public function tableRowsCount ($table)
     {
-        $del = self::$conn->prepare('SELECT * FROM tbl_users');
+        $del = self::$conn->prepare('SELECT * FROM '.$table);
         $del->execute();
 
         $count = $del->rowCount();
