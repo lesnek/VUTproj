@@ -8,6 +8,7 @@
  */
 require_once 'models/user.php';
 require_once 'basicPublicController.php';
+
 class indexController extends basicPublicController
 {
     public function run()

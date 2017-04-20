@@ -29,7 +29,7 @@ class Database
 		{
 		    if (!self::$conn instanceof PDO) {
 		        $content = file_get_contents(self::CONFIG_FILE);
-		        $json = json_decode($content);
+		        $json = (array)json_decode($content);
 
                 $this->host = $json["db_server"];
                 $this->db_name = $json["db_name"];
