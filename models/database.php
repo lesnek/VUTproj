@@ -12,7 +12,7 @@ class Database
     private $username;
     private $password;
 
-    const CONFIG_FILE = __DIR__ . "/../config.json";
+    const CONFIG_FILE = __DIR__ . "/../conf.json";
 
     /** @var PDO $conn **/
     static private $conn = null;
