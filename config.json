@@ -1,6 +1,6 @@
 {
-  "db_name": "",
-  "db_user": "",
-  "db_pass": "",
-  "db_server": ""
+  "db_name": "vutgame",
+  "db_user": "root",
+  "db_pass": "Makulinka95",
+  "db_server": "localhost"
 }
