@@ -7,6 +7,9 @@
  */
 
 require_once 'database.php';
+require_once 'user_quest.php';
+require_once 'quests.php';
+require_once 'quest.php';
 
 class USER
 {
@@ -170,7 +173,7 @@ class USER
                      USER::COLUMN_ZNAMKA      => $this->getZnamka(),
                      USER::COLUMN_POHLAVI     => $this->getPohlavi()
             ];
-            $result = $this->database->update(USER::TABLE, $data, $id);
+            $this->database->update(USER::TABLE, $data, $id);
         }
         catch(PDOException $ex)
         {
@@ -179,11 +182,12 @@ class USER
 
         return $result;
     }
+
     public function loadByMail($email)
     {
         try
         {
-            $data = $this->database->getByProperty(USER::TABLE, $this->columns, USER::COLUMN_USER_EMAIL, $email);
+            $data = $this->database->getByPropertyOne(USER::TABLE, $this->columns, USER::COLUMN_USER_EMAIL, $email);
 
             if(count($data) > 0)
             {
@@ -212,7 +216,7 @@ class USER
     {
         try
         {
-            $data = $this->database->getByProperty(USER::TABLE, $this->columns, USER::COLUMN_ID, $id);
+            $data = $this->database->getByPropertyOne(USER::TABLE, $this->columns, USER::COLUMN_ID, $id);
 
             if(count($data) > 0)
             {
@@ -242,7 +246,7 @@ class USER
 	{
 		try
 		{
-		    $data = $this->database->getByProperty(USER::TABLE, $this->columns, USER::COLUMN_USER_EMAIL, $email);
+		    $data = $this->database->getByPropertyOne(USER::TABLE, $this->columns, USER::COLUMN_USER_EMAIL, $email);
 
             $_SESSION['userSession'] = null;
 
@@ -296,15 +300,58 @@ class USER
     public static function existEmail($email)
     {
         $database = new Database();
-        $data = $database->getByProperty(USER::TABLE, [USER::COLUMN_USER_EMAIL], USER::COLUMN_USER_EMAIL, $email);
+        $data = $database->getByPropertyOne(USER::TABLE, [USER::COLUMN_USER_EMAIL], USER::COLUMN_USER_EMAIL, $email);
         $result = ($data && count($data) > 0);
         return $result;
     }
 
     public static function existUserName($uname) {
         $database = new Database();
-        $data = $database->getByProperty(USER::TABLE, [USER::COLUMN_USER_NAME], USER::COLUMN_USER_NAME, $uname);
+        $data = $database->getByPropertyOne(USER::TABLE, [USER::COLUMN_USER_NAME], USER::COLUMN_USER_NAME, $uname);
         $result = ($data && count($data) > 0);
+        return $result;
+    }
+
+    public static function loadFromSession() {
+        $id = base64_decode($_SESSION['userSession']);
+        $user = new USER($id);
+        return $user;
+    }
+
+    public function getQuests() {
+        $result = [];
+        $questsList = quests::getQuestList();
+        $questsUserList = quests::getUserQuestList($this->getId());
+
+        foreach($questsList as $item) {
+
+            /** @var quest $item */
+            $questId = $item->getId();
+
+            /** @var UserQuest $userQuest */
+            $userQuest = null;
+
+            if(!isset($questsUserList[$questId])) {
+                // jeste tento user nikdy nepouzil tento quest
+                $userQuest = new UserQuest(null, $this->getId(), $questId, null, 0);
+            } else {
+                $userQuest = $questsUserList[$questId];
+                if($item->getDuration() + strtotime($userQuest->getCreateTime()) > time()) {
+                    // jiz mel user tento quest pouzity ale porad jeste neni splnena delka doby trvani
+                    $userQuest->setStatus(quest::STATUS_RUNNING);
+                    $userQuest->save();
+                } else {
+                    // jiz mel user tento quest pouzity a je splnena delka doby trvani
+                    if($userQuest->getStatus() == quest::STATUS_RUNNING) {
+                        $userQuest->setStatus(quest::STATUS_READY_TO_COLLECT);
+                        $userQuest->save();
+                    }
+                }
+            }
+
+            $result[$questId] = $userQuest;
+        }
+
         return $result;
     }
 

@@ -31,10 +31,10 @@ class Database
 		        $content = file_get_contents(self::CONFIG_FILE);
 		        $json = (array)json_decode($content);
 
-                $this->host = $json["db_server"];
-                $this->db_name = $json["db_name"];
-                $this->username = $json["db_user"];
-                $this->password = $json["db_pass"];
+                $this->host = 'localhost';
+                $this->db_name = 'czsuprweb';
+                $this->username = 'root';
+                $this->password = '';
 
                 self::$conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
                 self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -111,7 +111,7 @@ class Database
     }
 
     /** Getting data from database by any property **/
-    public function getByProperty($table, $columns, $propertyColumn, $propertyValue)
+    public function getByPropertyOne($table, $columns, $propertyColumn, $propertyValue)
     {
         $result = null;
 
@@ -122,6 +122,37 @@ class Database
         $stmt->execute();
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /** Getting data from database by any property **/
+    public function getByPropertyAll($table, $columns, $propertyColumn, $propertyValue)
+    {
+        $result = null;
+
+        $sql = 'SELECT ' . implode(',', $columns) . ' FROM ' . $table . ' WHERE ' . $propertyColumn . '=:val_' . $propertyColumn;
+
+        $stmt = self::$conn->prepare($sql);
+        $stmt->bindparam(':val_' . $propertyColumn, $propertyValue);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /** Getting all data from database **/
+    public function getAll($table, $columns)
+    {
+        $result = null;
+
+        $sql = 'SELECT ' . implode(',', $columns) . ' FROM ' . $table;
+
+        $stmt = self::$conn->prepare($sql);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
     }

@@ -10,8 +10,22 @@ require_once 'basicPrivateController.php';
 
 class prednaska extends basicPrivateController
 {
+    private $user = null;
+    public $userQuestList = null;
+    public $questList = null;
+
     public function run()
     {
+        $this->user = USER::loadFromSession();
+        $this->questList = quests::getQuestList();
+        $this->userQuestList = $this->user->getQuests();
+
+
+
+
+
+
+
         if(isset($_POST['zacit'])) {
             $dobaPrednasky = $_POST['prednaska'];
 

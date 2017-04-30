@@ -12,14 +12,34 @@
                 <form method="post" action="prednaska.php">
                     <select name="prednaska" title="prednaska" style="margin-top: 10px">
                         <option value="" disabled selected>Vyberte jak dlouho vydržíte:</option>
-                        <option value="10">10 minut - 5 Energie</option>
-                        <option value="30">30 minut - 13 Energie</option>
-                        <option value="60">1 hodina - 20 Energie</option>
-                        <option value="120">2 hodiny - 30 Energie</option>
+                        <?php
+                        foreach($this->userQuestList as $userQuest) {
+                            /** @var UserQuest $userQuest */
+                            $questId = $userQuest->getTaskId();
+                            $status = $userQuest->getStatus();
+                            $statusText = ' / mozno zahajit';
+                            if($status == quest::STATUS_READY_TO_COLLECT) {
+                                $statusText = ' / mozno vybrat';
+                            } else if ($status == quest::STATUS_RUNNING){
+                                $statusText = ' / stale bezi';
+                            }
+
+                            /** @var quest $quest */
+                            $quest = $this->questList[$questId];
+                            $optionText = $quest->getDesc() . $statusText;
+                            $optionValue = $quest->getId();
+                            echo('<option value="'.$optionValue.'">'.$optionText.'</option>');
+                        }
+                        ?>
                     </select>
-                    <button class="btn btn-small btn-success" type="submit" name="zacit">Začít</button>
+                    <button id="button_submit_start"   style="display: none" class="btn btn-small btn-success" type="submit" name="zacit">Začít</button>
+                    <button id="button_submit_collect" style="display: none" class="btn btn-small btn-success" type="submit" name="vybrat">Vybrat</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script>
+    var userQuest = <?php echo(quests::userQuestListToJson($this->userQuestList)); ?>;
+
+</script>
