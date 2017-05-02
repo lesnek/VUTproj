@@ -31,10 +31,10 @@ class Database
 		        $content = file_get_contents(self::CONFIG_FILE);
 		        $json = (array)json_decode($content);
 
-                $this->host = 'localhost';
-                $this->db_name = 'czsuprweb';
-                $this->username = 'root';
-                $this->password = '';
+                $this->host = $json["db_server"];
+                $this->db_name = $json["db_name"];
+                $this->username = $json["db_user"];
+                $this->password = $json["db_pass"];
 
                 self::$conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
                 self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -110,7 +110,13 @@ class Database
         $stmt->execute();
     }
 
-    /** Getting data from database by any property **/
+    /** Getting data from database by any property *
+     * @param $table
+     * @param $columns
+     * @param $propertyColumn
+     * @param $propertyValue
+     * @return mixed|null
+     */
     public function getByPropertyOne($table, $columns, $propertyColumn, $propertyValue)
     {
         $result = null;
