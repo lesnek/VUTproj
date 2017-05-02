@@ -10,32 +10,32 @@ require_once 'database.php';
 class levels
 {
     const TABLE      = 'tbl_users';
-    const levl1      = 25;
-    const levl2      = 50;
-    const levl3      = 125;
-    const levl4      = 225;
-    const levl5      = 350;
-    const levl6      = 500;
-    const levl7      = 675;
-    const levl8      = 875;
-    const levl9      = 1100;
-    const levl10     = 1350;
-    const levl11     = 1625;
-    const levl12     = 1925;
-    const levl13     = 2250;
-    const levl14     = 2625;
-    const levl15     = 3025;
-    const levl16     = 3450;
-    const levl17     = 3875;
-    const levl18     = 4350;
-    const levl19     = 4850;
-    const levl20     = 5375;
-    const levl21     = 5925;
-    const levl22     = 6500;
-    const levl23     = 7100;
-    const levl24     = 7725;
-    const levl25     = 8375;
-    const levl26     = 9050;
+    const levl1      = 0;
+    const levl2      = 25;
+    const levl3      = 100;
+    const levl4      = 200;
+    const levl5      = 325;
+    const levl6      = 475;
+    const levl7      = 650;
+    const levl8      = 850;
+    const levl9      = 1075;
+    const levl10     = 1325;
+    const levl11     = 1600;
+    const levl12     = 1900;
+    const levl13     = 2225;
+    const levl14     = 2600;
+    const levl15     = 3000;
+    const levl16     = 3425;
+    const levl17     = 3850;
+    const levl18     = 4325;
+    const levl19     = 4825;
+    const levl20     = 5350;
+    const levl21     = 5900;
+    const levl22     = 6475;
+    const levl23     = 7075;
+    const levl24     = 7700;
+    const levl25     = 8350;
+    const levl26     = 9025;
 
 
     private $levelData = [1 => levels::levl1,
@@ -71,7 +71,10 @@ class levels
         $startExp = 0;
         foreach ($this->levelData as $key => $value)
         {
-            if ($key == $level){
+            if ($level == 1){
+                $startExp = 0;
+            }
+            elseif ($key == $level){
                 $startExp = $value;
             }
         }
