@@ -1036,7 +1036,6 @@
     margin-top: 5px;
   }
   .nav-collapse .dropdown-menu {
-    position: static;
     top: auto;
     left: auto;
     display: none;
