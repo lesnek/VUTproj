@@ -74,7 +74,7 @@ class levels
             if ($level == 1){
                 $startExp = 0;
             }
-            if ($key == $level){
+            elseif ($key == $level){
                 $startExp = $value;
             }
         }
@@ -86,7 +86,10 @@ class levels
         $endExp = 0;
         foreach ($this->levelData as $key => $value)
         {
-            if ($key == $level+1){
+            if ($level == 1){
+                $endExp = 25;
+            }
+            elseif ($key == $level+1){
                 $endExp = $value;
             }
         }
