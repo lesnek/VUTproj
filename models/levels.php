@@ -71,6 +71,9 @@ class levels
         $startExp = 0;
         foreach ($this->levelData as $key => $value)
         {
+            if ($level == 1){
+                $startExp = 0;
+            }
             if ($key == $level){
                 $startExp = $value;
             }
