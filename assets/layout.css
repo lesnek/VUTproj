@@ -1,8 +1,14 @@
 /** Home Page **/
 body {
 	padding-top: 60px;
-	padding-bottom: 40px;
-    background: #e5002b;
+    margin-bottom: 0;
+    background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(red, black); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(red, black); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(red, black); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(red, black); /* Standard syntax (must be last) */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .logoVUT {
@@ -19,7 +25,7 @@ body {
 .vuttlac a {
     text-decoration: none;
     color: rgb(230, 0, 42);
-    font-style: italic;
+    font-style: inherit;
     font-size: 30px;
     display: block;
 }
