@@ -5,6 +5,9 @@
  * Date: 20.04.2017
  * Time: 9:34
  */
+
+/** For Quest creating, their value, desc, everything what they are and do */
+
 class quest
 {
     /** Constants **/

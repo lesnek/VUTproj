@@ -36,7 +36,8 @@ class Database
                 $this->username = $json["db_user"];
                 $this->password = $json["db_pass"];
 
-                self::$conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
+                $dsn = "mysql:host=$this->host;dbname=$this->db_name;charset=utf8";
+                self::$conn = new PDO($dsn, $this->username, $this->password);
                 self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
         }
