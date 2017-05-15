@@ -55,7 +55,7 @@ class MyMail extends basicPublicController
         $mail->IsSMTP();
         $mail->SMTPDebug = 0;
         $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'ssl';
+        $mail->SMTPSecure = "ssl";
         $mail->Host = 'smtp.seznam.cz';
         $mail->Port = 465;
         $mail->AddAddress($email);
