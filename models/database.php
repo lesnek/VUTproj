@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: lesnek
@@ -14,7 +15,7 @@ class Database
 
     const CONFIG_FILE = __DIR__ . "/../conf.json";
 
-    /** @var PDO $conn **/
+    /** @var PDO $conn * */
     static private $conn = null;
 
     public function __construct()
@@ -24,12 +25,11 @@ class Database
 
     /** Connect to database - trought PDO **/
     public function dbConnect()
-	{
-        try
-		{
-		    if (!self::$conn instanceof PDO) {
-		        $content = file_get_contents(self::CONFIG_FILE);
-		        $json = (array)json_decode($content);
+    {
+        try {
+            if (!self::$conn instanceof PDO) {
+                $content = file_get_contents(self::CONFIG_FILE);
+                $json = (array)json_decode($content);
 
                 $this->host = $json["db_server"];
                 $this->db_name = $json["db_name"];
@@ -40,9 +40,7 @@ class Database
                 self::$conn = new PDO($dsn, $this->username, $this->password);
                 self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
-        }
-		catch(PDOException $exception)
-		{
+        } catch (PDOException $exception) {
             echo "Chyba databáze: " . $exception->getMessage();
         }
     }
@@ -57,7 +55,7 @@ class Database
 
         $dbResult = $stmt->fetch(PDO::FETCH_ASSOC);
         $dbResult = array_values($dbResult);
-        $result = (int) $dbResult[0];
+        $result = (int)$dbResult[0];
 
         return $result;
     }
@@ -66,9 +64,9 @@ class Database
      * @param String $table
      * @return int
      */
-    public function tableRowsCount ($table)
+    public function tableRowsCount($table)
     {
-        $del = self::$conn->prepare('SELECT * FROM '.$table);
+        $del = self::$conn->prepare('SELECT * FROM ' . $table);
         $del->execute();
 
         $count = $del->rowCount();
@@ -78,14 +76,13 @@ class Database
     /** Func to insert data to database **/
     public function insert($table, $data)
     {
-        $cols = implode(', ' , array_keys($data));
-        $vals  = ':val_' . implode(', :val_' , array_keys($data));
+        $cols = implode(', ', array_keys($data));
+        $vals = ':val_' . implode(', :val_', array_keys($data));
         $sql = 'INSERT INTO ' . $table . ' (' . $cols . ') VALUES (' . $vals . ');';
 
         $stmt = self::$conn->prepare($sql);
 
-        foreach ($data as $key => $value)
-        {
+        foreach ($data as $key => $value) {
             $stmt->bindValue(":val_" . $key, $value);
         }
         $stmt->execute();
@@ -96,15 +93,13 @@ class Database
     public function update($table, $data, $id)
     {
         $dataSet = [];
-        foreach ($data as $key => $value)
-        {
+        foreach ($data as $key => $value) {
             $dataSet[] = $key . " = :val_" . $key;
         }
 
         $sql = 'UPDATE ' . $table . ' SET ' . implode(',', $dataSet) . ' WHERE id = :val_id';
         $stmt = self::$conn->prepare($sql);
-        foreach ($data as $key => $value)
-        {
+        foreach ($data as $key => $value) {
             $stmt->bindValue(':val_' . $key, $value);
         }
         $stmt->bindValue(':val_id', $id);

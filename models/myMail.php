@@ -53,7 +53,7 @@ class MyMail extends basicPublicController
         require_once(__DIR__ . '/../mailer/class.phpmailer.php');
         $mail = new PHPMailer();
         $mail->IsSMTP();
-        $mail->SMTPDebug = 2;
+        $mail->SMTPDebug = 1;
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'ssl';
         $mail->Host = 'smtp.email.cz';
