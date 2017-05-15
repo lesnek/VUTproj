@@ -53,11 +53,11 @@ class MyMail extends basicPublicController
         require_once(__DIR__ . '/../mailer/class.phpmailer.php');
         $mail = new PHPMailer();
         $mail->IsSMTP();
-        $mail->SMTPDebug = 0;
-        $mail->SMTPAuth = false;
-        $mail->SMTPSecure = false;
+        $mail->SMTPDebug = 2;
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'ssl';
         $mail->Host = 'smtp.email.cz';
-        $mail->Port = 25;
+        $mail->Port = 465;
         $mail->AddAddress($email);
         $mail->Username = 'vutgame@email.cz';
         $mail->Password = 'noveheslo1';
