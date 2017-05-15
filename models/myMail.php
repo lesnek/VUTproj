@@ -55,12 +55,12 @@ class MyMail extends basicPublicController
         $mail->IsSMTP();
         $mail->SMTPDebug = 0;
         $mail->SMTPAuth = true;
-        $mail->SMTPSecure = "ssl";
-        $mail->Host = myMail::SMTP;
-        $mail->Port = myMail::Port;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Host = 'smtp.email.cz';
+        $mail->Port = 465;
         $mail->AddAddress($email);
-        $mail->Username = myMail::UserN;
-        $mail->Password = myMail::Pass;
+        $mail->Username = 'vutgame@email.cz';
+        $mail->Password = 'noveheslo1';
         $mail->SetFrom('vutgame@email.cz', 'VUTgame (no-reply)');
         $mail->AddReplyTo("vutgame@email.cz", "VUTgame");
         $mail->Subject = $subject;
