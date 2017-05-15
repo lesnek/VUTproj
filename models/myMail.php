@@ -8,7 +8,7 @@
  */
 class MyMail extends basicPublicController
 {
-    const SMTP             = 'smtp.seznam.cz';
+    const SMTP             = 'smtp.email.cz';
     const Port             = 465;
     const UserN            = 'vutgame@email.cz';
     const Pass             = 'studentvpn';
