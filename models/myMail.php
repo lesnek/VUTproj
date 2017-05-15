@@ -8,10 +8,10 @@
  */
 class MyMail extends basicPublicController
 {
-    const SMTP             = 'smtp.email.cz';
+    const SMTP             = 'smtp.seznam.cz';
     const Port             = 465;
     const UserN            = 'vutgame@email.cz';
-    const Pass             = 'noveheslo1';
+    const Pass             = 'studentvpn';
 
     public function sendForgotPassword(USER $user, $code, $email)
     {
@@ -23,7 +23,7 @@ class MyMail extends basicPublicController
 				   <br /><br />
 				   Klikněte prosím níže pro resetování hesla:
 				   <br /><br />
-				   <a href='http://www.lesnek.eu/resetPass.php?id=$key&code=$code'>Resetovat heslo</a>";
+				   <a href='http://www.suprweb.php5.cz/resetPass.php?id=$key&code=$code'>Resetovat heslo</a>";
         $subject = "Reset hesla";
 
         $this->sendMail($email,$message,$subject);
@@ -39,7 +39,7 @@ class MyMail extends basicPublicController
                     Vítejte v naší malé VUT hře<br/>
                     Pro registraci pokračujte přes odkaz níže<br/>
                     <br /><br />
-                    <a href='http://www.lesnek.eu/verify.php?id=$key&code=$code'>Klikněte zde pro aktivaci vašeho účtu</a>
+                    <a href='http://www.suprweb.php5.cz/verify.php?id=$key&code=$code'>Klikněte zde pro aktivaci vašeho účtu</a>
                     <br /><br />
                     Děkujeme za registraci";
 
@@ -56,11 +56,11 @@ class MyMail extends basicPublicController
         $mail->SMTPDebug = 0;
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = "ssl";
-        $mail->Host = 'smtp.seznam.cz';
-        $mail->Port = 465;
+        $mail->Host = myMail::SMTP;
+        $mail->Port = myMail::Port;
         $mail->AddAddress($email);
-        $mail->Username = 'vutgame@email.cz';
-        $mail->Password = 'noveheslo1';
+        $mail->Username = myMail::UserN;
+        $mail->Password = myMail::Pass;
         $mail->SetFrom('vutgame@email.cz', 'VUTgame (no-reply)');
         $mail->AddReplyTo("vutgame@email.cz", "VUTgame");
         $mail->Subject = $subject;
