@@ -54,8 +54,8 @@ class MyMail extends basicPublicController
         $mail = new PHPMailer();
         $mail->IsSMTP();
         $mail->SMTPDebug = 0;
-        $mail->SMTPAuth = true;
-        ///$mail->SMTPSecure = 'ssl';
+        $mail->SMTPAuth = false;
+        $mail->SMTPSecure = false;
         $mail->Host = 'smtp.email.cz';
         $mail->Port = 25;
         $mail->AddAddress($email);
