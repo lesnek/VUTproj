@@ -62,7 +62,7 @@ class PHPMailer {
    * Sets the Content-type of the message.
    * @var string
    */
-  public $ContentType       = 'text/html';
+  public $ContentType       = 'text/plain';
 
   /**
    * Sets the Encoding of the message. Options for this are
