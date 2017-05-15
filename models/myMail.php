@@ -55,9 +55,9 @@ class MyMail extends basicPublicController
         $mail->IsSMTP();
         $mail->SMTPDebug = 0;
         $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'ssl';
+        ///$mail->SMTPSecure = 'ssl';
         $mail->Host = 'smtp.email.cz';
-        $mail->Port = 465;
+        $mail->Port = 25;
         $mail->AddAddress($email);
         $mail->Username = 'vutgame@email.cz';
         $mail->Password = 'noveheslo1';
