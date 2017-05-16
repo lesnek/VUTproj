@@ -9,7 +9,7 @@
 class MyMail extends basicPublicController
 {
     const SMTP             = 'smtp.gmail.com';
-    const Port             = 465;
+    const Port             = "587";
     private $UserN;
     private $Pass;
 
@@ -60,7 +60,7 @@ class MyMail extends basicPublicController
         //$mail->IsSMTP();
         $mail->SMTPDebug = 0;
         $mail->SMTPAuth = true;
-        $mail->SMTPSecure = "ssl";
+        $mail->SMTPSecure = 'tls';
         $mail->Host = myMail::SMTP;
         $mail->Port = myMail::Port;
         $mail->AddAddress($email);
@@ -71,5 +71,6 @@ class MyMail extends basicPublicController
         $mail->Subject = $subject;
         $mail->MsgHTML($message);
         $mail->Send();
+        echo 'funguje';
     }
 }
