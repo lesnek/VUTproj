@@ -69,7 +69,7 @@ class MyMail extends basicPublicController
         $mail->AddReplyTo("vutgame.noreply@gmail.com", "VUTgame");
         $mail->Subject = $subject;
         $mail->MsgHTML($message);
-        //$mail->IsSMTP();
+        $mail->IsSMTP();
         $mail->Send();
         mail($email,$subject,$message);
     }
