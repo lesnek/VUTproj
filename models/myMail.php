@@ -9,7 +9,7 @@
 class MyMail extends basicPublicController
 {
     const SMTP             = 'smtp.gmail.com';
-    const Port             = 587;
+    const Port             = 465;
     private $UserN;
     private $Pass;
 
@@ -53,14 +53,14 @@ class MyMail extends basicPublicController
 
     private function sendMail($email, $message, $subject)
     {
-        /**require_once(__DIR__ . '/../mailer/class.phpmailer.php');
+        require_once(__DIR__ . '/../mailer/class.phpmailer.php');
         $content = file_get_contents(self::CONFIG_FILE);
         $json = (array)json_decode($content);
         $mail = new PHPMailer();
         $mail->IsSMTP();
         $mail->SMTPDebug = 0;
         $mail->SMTPAuth = true;
-        $mail->SMTPSecure = "tls";
+        $mail->SMTPSecure = "ssl";
         $mail->Host = myMail::SMTP;
         $mail->Port = myMail::Port;
         $mail->AddAddress($email);
@@ -70,7 +70,6 @@ class MyMail extends basicPublicController
         $mail->AddReplyTo("vutgame.noreply@gmail.com", "VUTgame");
         $mail->Subject = $subject;
         $mail->MsgHTML($message);
-        $mail->Send();*/
-        mail($email,$subject,$message);
+        $mail->Send();
     }
 }
