@@ -60,7 +60,7 @@ class MyMail extends basicPublicController
         $mail->SMTPDebug = 1;
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'ssl';
-        $mail->Host = 'smtp.gmail.com';
+        $mail->Host = 'localhost';
         $mail->Port = '465';
         $mail->AddAddress($email);
         $mail->Username = $this->UserN = $json["mail_user_name"];
