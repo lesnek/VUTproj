@@ -57,7 +57,6 @@ class MyMail extends basicPublicController
         $content = file_get_contents(self::CONFIG_FILE);
         $json = (array)json_decode($content);
         $mail = new PHPMailer();
-        //$mail->IsSMTP();
         $mail->SMTPDebug = 0;
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'tls';
@@ -70,6 +69,7 @@ class MyMail extends basicPublicController
         $mail->AddReplyTo("vutgame.noreply@gmail.com", "VUTgame");
         $mail->Subject = $subject;
         $mail->MsgHTML($message);
+        $mail->IsSMTP();
         $mail->Send();
         echo 'funguje';
     }
