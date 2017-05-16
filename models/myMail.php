@@ -8,10 +8,13 @@
  */
 class MyMail extends basicPublicController
 {
-    const SMTP             = 'smtp.seznam.cz';
-    const Port             = 465;
-    const UserN            = 'vutgame@email.cz';
-    const Pass             = 'noveheslo1';
+    const SMTP             = 'smtp.gmail.com';
+    const Port             = 587;
+    private $UserN;
+    private $Pass;
+
+    const CONFIG_FILE = __DIR__ . "/../conf.json";
+
 
     public function sendForgotPassword(USER $user, $code, $email)
     {
@@ -51,18 +54,20 @@ class MyMail extends basicPublicController
     private function sendMail($email, $message, $subject)
     {
         require_once(__DIR__ . '/../mailer/class.phpmailer.php');
+        $content = file_get_contents(self::CONFIG_FILE);
+        $json = (array)json_decode($content);
         $mail = new PHPMailer();
         $mail->IsSMTP();
         $mail->SMTPDebug = 0;
         $mail->SMTPAuth = true;
-        $mail->SMTPSecure = "ssl";
+        $mail->SMTPSecure = "tls";
         $mail->Host = myMail::SMTP;
         $mail->Port = myMail::Port;
         $mail->AddAddress($email);
-        $mail->Username = myMail::UserN;
-        $mail->Password = myMail::Pass;
-        $mail->SetFrom('vutgame@email.cz', 'VUTgame (no-reply)');
-        $mail->AddReplyTo("vutgame@email.cz", "VUTgame");
+        $mail->Username = $this->UserN = $json["mail_user_name"];
+        $mail->Password = $this->Pass = $json["mail_pass"];
+        $mail->SetFrom('vutgame.noreply@gmail.com', 'VUTgame (no-reply)');
+        $mail->AddReplyTo("vutgame.noreply@gmail.com", "VUTgame");
         $mail->Subject = $subject;
         $mail->MsgHTML($message);
         $mail->Send();
