@@ -59,7 +59,7 @@ class MyMail extends basicPublicController
         $mail = new PHPMailer();
         $mail->SMTPDebug = 3;
         $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'ssl';
+        //$mail->SMTPSecure = 'ssl';
         $mail->Host = 'smtp.gmail.com';
         $mail->Port = '25';
         $mail->AddAddress($email);
