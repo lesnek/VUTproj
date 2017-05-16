@@ -57,7 +57,7 @@ class MyMail extends basicPublicController
         $content = file_get_contents(self::CONFIG_FILE);
         $json = (array)json_decode($content);
         $mail = new PHPMailer();
-        $mail->IsSMTP();
+        //$mail->IsSMTP();
         $mail->SMTPDebug = 0;
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = "ssl";
