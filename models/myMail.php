@@ -53,7 +53,7 @@ class MyMail extends basicPublicController
 
     private function sendMail($email, $message, $subject)
     {
-        require_once(__DIR__ . '/../mailer/class.phpmailer.php');
+        /**require_once(__DIR__ . '/../mailer/class.phpmailer.php');
         $content = file_get_contents(self::CONFIG_FILE);
         $json = (array)json_decode($content);
         $mail = new PHPMailer();
@@ -70,6 +70,7 @@ class MyMail extends basicPublicController
         $mail->AddReplyTo("vutgame.noreply@gmail.com", "VUTgame");
         $mail->Subject = $subject;
         $mail->MsgHTML($message);
-        $mail->Send();
+        $mail->Send();*/
+        mail($email,$subject,$message);
     }
 }
