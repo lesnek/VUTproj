@@ -8,8 +8,8 @@
  */
 class MyMail extends basicPublicController
 {
-    const SMTP             = 'smtp.gmail.com';
-    const Port             = "587";
+    //const SMTP             = 'smtp.gmail.com';
+    //const Port             = "587";
     private $UserN;
     private $Pass;
 
@@ -57,20 +57,19 @@ class MyMail extends basicPublicController
         $content = file_get_contents(self::CONFIG_FILE);
         $json = (array)json_decode($content);
         $mail = new PHPMailer();
-//        $mail->SMTPDebug = 0;
-//        $mail->SMTPAuth = true;
-//        $mail->SMTPSecure = 'tls';
-//        $mail->Host = myMail::SMTP;
-//        $mail->Port = myMail::Port;
+        $mail->SMTPDebug = 1;
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = '465';
         $mail->AddAddress($email);
-//        $mail->Username = $this->UserN = $json["mail_user_name"];
-//        $mail->Password = $this->Pass = $json["mail_pass"];
+        $mail->Username = $this->UserN = $json["mail_user_name"];
+        $mail->Password = $this->Pass = $json["mail_pass"];
         $mail->SetFrom('vutgame.noreply@gmail.com', 'VUTgame (no-reply)');
         $mail->AddReplyTo("vutgame.noreply@gmail.com", "VUTgame");
         $mail->Subject = $subject;
         $mail->MsgHTML($message);
-        //$mail->IsSMTP();
+        $mail->IsSMTP();
         $mail->Send();
-        echo 'funguje';
     }
 }
