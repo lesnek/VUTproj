@@ -3172,10 +3172,8 @@ table th[class*="span"],
   font-size: 20px;
   font-weight: bold;
   line-height: 20px;
-  color: #000000;
+  color: #ffffff;
   text-shadow: 0 1px 0 #ffffff;
-  opacity: 0.2;
-  filter: alpha(opacity=20);
 }
 
 .close:hover,
@@ -3874,6 +3872,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .alert {
+  width: 90%;
   padding: 8px 35px 8px 14px;
   margin-bottom: 20px;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);

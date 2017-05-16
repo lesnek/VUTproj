@@ -7,6 +7,7 @@
  */
 require_once 'models/user.php';
 require_once 'basicPrivateController.php';
+require_once 'models/quest.php';
 
 class prednaska extends basicPrivateController
 {
@@ -14,8 +15,10 @@ class prednaska extends basicPrivateController
     public $userQuestList = null;
     public $questList = null;
 
+
     public function run()
     {
+        $quest = new quests();
         $this->user = USER::loadFromSession();
         $this->questList = quests::getQuestList();
         $this->userQuestList = $this->user->getQuests();
@@ -24,12 +27,10 @@ class prednaska extends basicPrivateController
 
 
 
-
-
         if(isset($_POST['zacit'])) {
-            $dobaPrednasky = $_POST['prednaska'];
-
-            }
+            $idPrednasky = $_POST['prednaska'];
+        $this->user->setQuest($idPrednasky, quest::STATUS_RUNNING);
+        }
         $this->renderPrivate('prednaska.phtml');
     }
 }

@@ -17,7 +17,7 @@
                             /** @var UserQuest $userQuest */
                             $questId = $userQuest->getTaskId();
                             $status = $userQuest->getStatus();
-                            $statusText = ' / mozno zahajit';
+                            $statusText = ' / možno zahájit';
                             if($status == quest::STATUS_READY_TO_COLLECT) {
                                 $statusText = ' / mozno vybrat';
                             } else if ($status == quest::STATUS_RUNNING){
@@ -32,14 +32,14 @@
                         }
                         ?>
                     </select>
-                    <button id="button_submit_start"   style="display: none" class="btn btn-small btn-success" type="submit" name="zacit">Začít</button>
+                    <button id="button_submit_start"   style="display: inline-block" class="btn btn-small btn-success" type="submit" name="zacit">Začít</button>
                     <button id="button_submit_collect" style="display: none" class="btn btn-small btn-success" type="submit" name="vybrat">Vybrat</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<script>
-    var userQuest = <?php echo(quests::userQuestListToJson($this->userQuestList)); ?>;
+<!--<script>
+var userQuest = <?php echo(quests::userQuestListToJson($this->userQuestList)); ?>;
 
-</script>
+</script>--!>

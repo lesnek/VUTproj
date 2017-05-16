@@ -8,11 +8,11 @@ if(isset($this->msg) && count($this->msg) > 0)
         $msgText = $msgData['text'];
         if($msgType == 'ERROR')
         {
-            echo("<div class='alert alert-error'><button class='close' data-dismiss='alert'>&times;</button>" . $msgText . "</div>");
+            echo("<div class='alert alert-error alertm'><button class='close' data-dismiss='alert'>&times;</button>" . $msgText . "</div>");
         }
         else if($msgType == 'SUCCESS')
         {
-            echo("<div class='alert alert-success'><button class='close' data-dismiss='alert'>&times;</button>" . $msgText . "</div>");
+            echo("<div class='alert alert-success alertm'><button class='close' data-dismiss='alert'>&times;</button>" . $msgText . "</div>");
         }
     }
 }
