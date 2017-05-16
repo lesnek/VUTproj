@@ -847,7 +847,7 @@ class PHPMailer {
   * @param string $lang_path Path to the language file directory
   * @access public
   */
-  function SetLanguage($langcode = 'cs', $lang_path = 'language/') {
+  function SetLanguage($langcode = 'en', $lang_path = 'language/') {
     //Define full set of translatable strings
     $PHPMAILER_LANG = array(
       'provide_address' => 'You must provide at least one recipient email address.',
@@ -870,7 +870,7 @@ class PHPMailer {
     );
     //Overwrite language-specific strings. This way we'll never have missing translations - no more "language string failed to load"!
     $l = true;
-    if ($langcode != 'cs') { //There is no English translation file
+    if ($langcode != 'en') { //There is no English translation file
       $l = @include $lang_path.'phpmailer.lang-'.$langcode.'.php';
     }
     $this->language = $PHPMAILER_LANG;
