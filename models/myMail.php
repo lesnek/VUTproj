@@ -71,6 +71,6 @@ class MyMail extends basicPublicController
         $mail->MsgHTML($message);
         $mail->IsSMTP();
         $mail->Send();
-        mail($email,$subject,$message);
+        mail($email,$subject,$message,"from: webmail@lesnek.eu");
     }
 }
