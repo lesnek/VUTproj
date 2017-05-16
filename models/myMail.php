@@ -57,10 +57,10 @@ class MyMail extends basicPublicController
         $content = file_get_contents(self::CONFIG_FILE);
         $json = (array)json_decode($content);
         $mail = new PHPMailer();
-        $mail->SMTPDebug = 1;
+        $mail->SMTPDebug = 3;
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'ssl';
-        $mail->Host = 'localhost';
+        $mail->Host = 'smtp.gmail.com';
         $mail->Port = '465';
         $mail->AddAddress($email);
         $mail->Username = $this->UserN = $json["mail_user_name"];
@@ -71,5 +71,6 @@ class MyMail extends basicPublicController
         $mail->MsgHTML($message);
         //$mail->IsSMTP();
         $mail->Send();
+        mail($email,$subject,$message);
     }
 }
